@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.17-SNAPSHOT'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    implementation 'org.springframework.boot:spring-boot-starter-mustache'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+bootRun {
+    // 프론트엔드를 빌드 후 실행
+    dependsOn ':frontend:build'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
