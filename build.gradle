@@ -21,14 +21,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.boot:spring-boot-starter-mustache'
+    implementation platform("com.google.cloud:spring-cloud-gcp-dependencies:3.4.0")
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-bootRun {
-    // 프론트엔드를 빌드 후 실행
-    dependsOn ':frontend:build'
-}
 
 tasks.named('test') {
     useJUnitPlatform()
