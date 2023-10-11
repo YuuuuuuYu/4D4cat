@@ -133,10 +133,10 @@ public class searchExample {
         ObjectMapper objectMapper = new ObjectMapper();
         String json = null;
 
-        List<String> list = objectMapper.readValue(str, List.class);
+        // 들여쓰기 수준을 기본값으로 설정
+        objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 
-        // JSON을 정렬하도록 설정
-        objectMapper.configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
+        List<String> list = objectMapper.readValue(str, List.class);
 
         System.out.println(objectMapper.writeValueAsString(list));
 
