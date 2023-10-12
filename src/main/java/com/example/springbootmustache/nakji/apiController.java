@@ -1,17 +1,18 @@
-package com.example.springbootmustache;
+package com.example.springbootmustache.nakji;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MustacheController {
+@RequestMapping(value="/api/search")
+public class apiController {
 
-    @GetMapping("/")
-    public String index(Model model) {
+    @GetMapping("/naver")
+    public String naver(Model model) {
         model.addAttribute("title", "Hello, World!");
         model.addAttribute("message", "This is a mustache template.");
         return "index";
     }
-
 }
