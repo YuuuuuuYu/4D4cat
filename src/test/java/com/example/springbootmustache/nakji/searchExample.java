@@ -2,13 +2,9 @@ package com.example.springbootmustache.nakji;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -20,9 +16,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.List;
-import java.util.StringTokenizer;
 
 @SpringBootTest
+@SuppressWarnings("unchecked")
 public class searchExample {
 
     //private final static String ID = System.getProperty("api.naver.id");
@@ -33,7 +29,6 @@ public class searchExample {
     //private final static String GOOGLE_KEY = "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";
     private final static String GOOGLE_KEY = "AIzaSyBxdEGZKno9zIewJzFjMzCqngx_dxuWdHE";
     private final static String GOOGLE_CX = "c7afc5a33141f45f6";
-
 
     @Test
     void neverSearchTest() {
