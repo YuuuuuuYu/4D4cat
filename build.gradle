@@ -14,7 +14,7 @@ repositories {
 }
 
 tasks {
-    test.enabled = false
+    //test.enabled = false
 }
 
 dependencies {
@@ -33,4 +33,3 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
-~                              

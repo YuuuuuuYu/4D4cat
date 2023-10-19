@@ -1,3 +1,6 @@
+server:
+  port: 8888
+
 logging:
   level:
     org.springframework.boot.context.event: warn
@@ -6,6 +9,3 @@ profile:
   nakji:
     imgUrl: 'https://avatars.githubusercontent.com/u/37291245?v=4'
     srcUrl: '/nakji/'
-
-
-
