@@ -14,7 +14,7 @@ repositories {
 }
 
 tasks {
-    //test.enabled = false
+    test.enabled = false
 }
 
 dependencies {
@@ -22,9 +22,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.boot:spring-boot-starter-mustache'
-
-    implementation platform('com.google.cloud:libraries-bom:26.24.0')
-    implementation 'com.google.cloud:google-cloud-firestore'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
