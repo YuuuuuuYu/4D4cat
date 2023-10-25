@@ -13,24 +13,17 @@ public class mockMvcTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private class PageView {
-        private String title;
-        private String content;
-
-        // Getter and Setter methods
-    }
-
     @Test
     void mockMvcTest() throws Exception {
         searchExample ex = new searchExample();
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/convert")
+                        .post("/nakji/convert")
                         .contentType("application/json")
                         .content("{\"title\":\"Sample Page\",\"content\":\"Sample Content\"}"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Sample Page"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content").value("Sample Content"));
+                .andExpect(MockMvcResultMatchers.jsonPath("title").value("Sample Page"))
+                .andExpect(MockMvcResultMatchers.jsonPath("content").value("Sample Content"));
 
 
     }
