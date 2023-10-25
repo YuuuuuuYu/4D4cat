@@ -49,8 +49,6 @@ public class NakjiProperty extends UserProperties {
     }
 
     public HttpURLConnection naverSearchConnection(String id, String search) {
-        System.out.println(NAVER_ID);
-
         String query = "".equals(search) ? "bag" : search;
         String serviceId = "".equals(id) ? "blog.json" : id;
         String host = "https://openapi.naver.com/v1/search/"+serviceId;
