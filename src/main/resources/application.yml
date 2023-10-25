@@ -9,3 +9,7 @@ profile:
   nakji:
     imgUrl: 'https://avatars.githubusercontent.com/u/37291245?v=4'
     srcUrl: '/nakji/'
+    NAVER_ID: 'DXUdYJLVPWaC2kxD_PUm'
+    NAVER_KEY: 'SFvAihes1e'
+    GOOGLE_KEY: 'AIzaSyBxdEGZKno9zIewJzFjMzCqngx_dxuWdHE'
+    GOOGLE_CX: 'c7afc5a33141f45f6'
