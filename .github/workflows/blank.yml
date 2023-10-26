@@ -22,3 +22,8 @@ jobs:
       NAKJI_NAVER_KEY: ${{ secrets.NAKJI_NAVER_KEY }}
       NAKJI_GOOGLE_KEY: ${{ secrets.NAKJI_GOOGLE_KEY }}
       NAKJI_GOOGLE_CX: ${{ secrets.NAKJI_GOOGLE_CX }}
+      
+    steps:
+      - name: Show Environment Variables
+        run: |
+          echo "Set Environment Variables"
