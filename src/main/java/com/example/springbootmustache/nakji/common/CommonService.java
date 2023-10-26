@@ -14,9 +14,10 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 @Service
+@SuppressWarnings("unchecked")
 public class CommonService {
 
-    public static JsonNode readBody(InputStream body){
+    public JsonNode readBody(InputStream body){
         InputStreamReader streamReader = new InputStreamReader(body, Charset.forName("UTF-8"));
 
         try (BufferedReader lineReader = new BufferedReader(streamReader)) {
@@ -36,7 +37,7 @@ public class CommonService {
         }
     }
 
-    public static void printJson(String str) throws JsonProcessingException {
+    public void printJson(String str) throws JsonProcessingException {
         // ObjectMapper 인스턴스 생성
         ObjectMapper objectMapper = new ObjectMapper();
         String json = null;
