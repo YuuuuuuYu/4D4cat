@@ -49,7 +49,7 @@ public class NakjiProperty extends UserProperties {
     }
 
     public HttpURLConnection naverSearchConnection(String id, String search) {
-        String query = "".equals(search) ? "bag" : search;
+        String query = "".equals(nvl(search)) ? "bag" : search;
         String serviceId = "".equals(id) ? "blog.json" : id;
         String host = "https://openapi.naver.com/v1/search/"+serviceId;
 

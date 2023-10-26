@@ -32,8 +32,7 @@ public class NakjiController {
     }
 
     @GetMapping("/api/naver")
-    @ResponseBody
-    public List<PageView> naverSearch() {
+    public String naverSearch(Model model, @RequestParam(name = "query", required = false) String query) {
         JsonNode resultJson = null;
         JsonNode jsonMap = null;
         HttpURLConnection connection = null;
@@ -41,23 +40,22 @@ public class NakjiController {
         int responseCode = -1;
 
         try {
-            connection = nakji.naverSearchConnection("", "");
-
+            connection = nakji.naverSearchConnection("", query);
             responseCode = connection.getResponseCode();
-            resultJson = commonService.readBody(connection.getInputStream());
 
-            jsonMap = resultJson.findValue("items");
-            commonService.printJson(jsonMap.toString());
+            if (responseCode == HttpURLConnection.HTTP_OK){
+                resultJson = commonService.readBody(connection.getInputStream());
+                jsonMap = resultJson.findValue("items");
+                returnPage = new ArrayList<>();
 
-            returnPage = new ArrayList<>();
-            if (jsonMap.isArray()) {
                 Iterator<JsonNode> elements = jsonMap.elements();
                 JsonNode item = null;
                 while (elements.hasNext()) {
                     item = elements.next();
-                    returnPage.add(new PageView(item.get("title").toString(), item.get("description").toString(), item.get("link").toString()));
+                    returnPage.add(new PageView(item.get("title").asText(), item.get("description").asText(), item.get("link").asText()));
                 }
             }
+
         } catch(Exception e) {
           e.printStackTrace();
 
@@ -65,13 +63,9 @@ public class NakjiController {
             if (connection != null) connection.disconnect();
         }
 
-        return returnPage;
+        model.addAttribute("pages", returnPage);
+
+        return "nakji/page/pageView";
     }
 
-    @PostMapping("/convert")
-    @ResponseBody
-    public PageView convert(@RequestBody PageView pageView) {
-
-        return pageView;
-    }
 }
