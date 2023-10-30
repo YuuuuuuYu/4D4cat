@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 @Component
 @ConfigurationProperties(prefix = "profile.nakji")
@@ -56,7 +57,7 @@ public class NakjiProperty extends UserProperties {
         URL url = null;
         HttpURLConnection connection = null;
         try {
-            url = new URL(host+"?query="+query);
+            url = new URL(host+"?query="+ URLEncoder.encode(query, "UTF-8"));
             connection = (HttpURLConnection) url.openConnection();
 
             connection.setRequestMethod("GET");
