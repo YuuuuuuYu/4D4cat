@@ -29,4 +29,11 @@ public class ApiController {
 
         return apiService.searchResultToTemplate(pageResult);
     }
+
+    @GetMapping("/google")
+    public String googleSearchApi(@RequestParam(name = "query", required = false) String query) {
+        List<PageView> pageResult = apiService.googleSearch(query);
+
+        return apiService.searchResultToTemplate(pageResult);
+    }
 }

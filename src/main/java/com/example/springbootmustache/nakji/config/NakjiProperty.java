@@ -73,4 +73,24 @@ public class NakjiProperty extends UserProperties {
         return connection;
     }
 
+    public HttpURLConnection googleSearchConnection(String search) {
+        String query = "".equals(nvl(search)) ? "bag" : search;
+        String host = "https://www.googleapis.com/customsearch/v1";
+
+        URL url = null;
+        HttpURLConnection connection = null;
+        try {
+            url = new URL(host+"?key="+GOOGLE_KEY+"&cx="+GOOGLE_CX+"&q="+ URLEncoder.encode(query, "UTF-8"));
+            connection = (HttpURLConnection) url.openConnection();
+
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+
+        } catch(Exception e) {
+            e.printStackTrace();
+
+        }
+
+        return connection;
+    }
 }
