@@ -23,7 +23,7 @@ public class ApiController {
         return pageView;
     }
 
-    @GetMapping("/naver.text")
+    @GetMapping("/naver")
     public String naverSearchApi(@RequestParam(name = "query", required = false) String query) {
         List<PageView> pageResult = apiService.naverSearch(query);
 
