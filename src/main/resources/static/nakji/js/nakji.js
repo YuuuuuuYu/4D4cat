@@ -52,10 +52,27 @@ function toggleSearchImg(target) {
         target.src = imgSrc.replace('_pick', '');
     }
 }
+function renderingData(list) {
+    let resultDiv = document.getElementById("searchResult");
+    let htmlForm = `
+        <h2>Search Result</h2>
+        <ul>
+    `;
+
+    list.forEach(function(data) {
+        htmlForm += '<li>';
+        htmlForm += '<h3>'+data.title+'</h3>';
+        htmlForm += '<p>'+data.content+'</p>';
+        htmlForm += '<a href="'+data.link+'" target="_blank">Read more</a>';
+        htmlForm += '</li>';
+    });
+
+    htmlForm += '</ul>';
+    resultDiv.innerHTML = htmlForm;
+}
 async function doSearch() {
     const engine = document.querySelector('div#search-engine button.active');
     let query = document.getElementById("ipt_search").value;
-    let resultDiv = document.getElementById("searchResult");
 
     if(engine == null) {
         alert('검색 엔진을 선택해주세요.');
@@ -68,15 +85,16 @@ async function doSearch() {
     }
 
     let url = '/nakji/api/'+engine.name+'?query='+query;
-    const response = await fetch(url)
+    await fetch(url)
         .then(response => {
             if (response.ok) {
-                return response.text();
+                return response.json();
 
             } else {
                 throw new Error("네트워크 응답이 정상적이지 않습니다");
             }
+        })
+        .then(data => {
+            renderingData(data);
         });
-
-    resultDiv.innerHTML = response;
 }

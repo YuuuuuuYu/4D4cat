@@ -24,16 +24,14 @@ public class ApiController {
     }
 
     @GetMapping("/naver")
-    public String naverSearchApi(@RequestParam(name = "query", required = false) String query) {
-        List<PageView> pageResult = apiService.naverSearch(query);
+    public List<PageView> naverSearchApi(@RequestParam(name = "query", required = false) String query) {
 
-        return apiService.searchResultToTemplate(pageResult);
+        return apiService.naverSearch(query);
     }
 
     @GetMapping("/google")
-    public String googleSearchApi(@RequestParam(name = "query", required = false) String query) {
-        List<PageView> pageResult = apiService.googleSearch(query);
+    public List<PageView> googleSearchApi(@RequestParam(name = "query", required = false) String query) {
 
-        return apiService.searchResultToTemplate(pageResult);
+        return apiService.googleSearch(query);
     }
 }
