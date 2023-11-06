@@ -88,20 +88,4 @@ public class ApiService {
 
         return returnPage;
     }
-
-    public String searchResultToTemplate(List<PageView> list) {
-        StringBuilder result = new StringBuilder();
-
-        result.append("<ul>");
-        for (PageView page : list) {
-            result.append("<li>");
-            result.append("<h3>").append(page.getTitle()).append("</h3>");
-            result.append("<p>").append(page.getContent()).append("</p>");
-            result.append("<a href=\"").append(page.getLink()).append("\" target=\"_blank\">Read more</a>");
-            result.append("</li>");
-        }
-        result.append("</ul>");
-
-        return result.toString();
-    }
 }
