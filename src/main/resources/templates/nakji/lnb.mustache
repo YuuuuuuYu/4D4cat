@@ -16,22 +16,16 @@
 
         <nav id="navbar" class="nav-menu navbar">
             <ul>
-                <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
-                <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
-                <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
-                <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
-                <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Services</span></a></li>
-                <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
-                <li><a href="#search" class="nav-link scrollto">
-                    <form action="" method="post">
-                        <div id="search-engine" role="group" aria-label="select search engine"></div>
-                        <input type="text" name="search" id="ipt_search">
-                        <i id="btn_search" class="bi bi-search" onclick="doSearch();return;"></i>
-                    </form>
-                </a></li>
+                <li><a href="#hero" class="nav-link scrollto"><i class="bx bx-home"></i><span>Home</span></a></li>
+                <li>
+                    <div id="search-engine" role="group" aria-label="select search engine"></div>
+                    <div class="input-group">
+                        <input type="text" name="search" id="ipt_search" placeholder="Search Query">
+                        <button class="btn btn-secondary" onclick="doSearch();return;"><i id="btn_search" class="bi bi-search" ></i></button>
+                    </div>
+                </li>
             </ul>
             <span class="material-icons">anchor</span>
-            <span><img src="/assets/img/anchor_black_24dp.svg" alt="검색"></span>
         </nav><!-- .nav-menu -->
     </div>
 </header><!-- End Header -->
