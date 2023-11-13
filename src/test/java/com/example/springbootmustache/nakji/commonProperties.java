@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class commonProperties {
 
     //private final static String ID = System.getProperty("api.naver.id");
