@@ -16,10 +16,12 @@ import java.net.URL;
 public class topTermsExample extends commonProperties {
 
     @Test
-    void googleSearchTest() throws JsonProcessingException, JSONException {
+    void googleTopTermsTest() throws JsonProcessingException, JSONException {
         String projectId = "crested-column-401906";
-        String host = "https://bigquery.googleapis.com/v2/projects/"+projectId+"/queries";
-        String query = "SELECT refresh_date AS Day, term AS Top_Term, rank FROM `bigquery-public-data.google_trends.top_terms` WHERE rank <= 10 AND refresh_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 2 DAY) GROUP BY Day, Top_Term, rank ORDER BY rank";
+        String datasetId = "_4b4e36620224ba95c01416e7d9d98a9ff1e48d38";
+        String jobId = "bquxjob_79cc349e_18bc75a0643";
+        String host = "https://bigquery.googleapis.com/bigquery/v2/projects/"+projectId+"/datasets/"+datasetId;
+        String query = "SELECT refresh_date AS Day, term AS Top_Term, rank FROM `bigquery-public-data.google_trends.top_terms` WHERE rank <= 5 AND refresh_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 2 DAY) GROUP BY Day, Top_Term, rank ORDER BY rank";
         StringBuilder text = new StringBuilder();
         JsonNode resultJson = null;
         JsonNode jsonMap = null;
@@ -29,33 +31,18 @@ public class topTermsExample extends commonProperties {
         HttpURLConnection connection = null;
         try {
             text.append(host);
+            text.append("?key=").append(GOOGLE_KEY).append("&cx=").append(GOOGLE_CX);
             url = new URL(text.toString());
             connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
+            connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            connection.setDoOutput(true);
 
-            // 쿼리 전송
-            String body = "{\n" +
-                    "  \"query\": \"" + query + "\"\n" +
-                    "}";
-            PrintWriter writer = new PrintWriter(connection.getOutputStream());
-            writer.print(body);
-            writer.close();
-
-            // 응답 수신
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String response = reader.lines().collect(Collectors.joining("\n"));
-            reader.close();
-
-            System.out.println(response);
-            /*
             int responseCode = connection.getResponseCode();
             System.out.println(responseCode);
 
             resultJson = readBody(connection.getInputStream());
             System.out.println(resultJson);
-            */
+
         } catch(Exception e) {
             e.printStackTrace();
 
