@@ -2,7 +2,7 @@ package com.example.springbootmustache.nakji.api.service;
 
 import com.example.springbootmustache.nakji.common.CommonService;
 import com.example.springbootmustache.nakji.config.NakjiProperty;
-import com.example.springbootmustache.nakji.model.PageView;
+import com.example.springbootmustache.nakji.model.SearchForm;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +21,11 @@ public class ApiService {
     @Autowired
     CommonService commonService;
 
-    public List<PageView> naverSearch(String query) {
+    public List<SearchForm> naverSearch(String query) {
         JsonNode resultJson = null;
         JsonNode jsonMap = null;
         HttpURLConnection connection = null;
-        List<PageView> returnPage = null;
+        List<SearchForm> returnPage = null;
         int responseCode = -1;
 
         try {
@@ -41,7 +41,7 @@ public class ApiService {
                 JsonNode item = null;
                 while (elements.hasNext()) {
                     item = elements.next();
-                    returnPage.add(new PageView(item.get("title").asText(), item.get("description").asText(), item.get("link").asText()));
+                    returnPage.add(new SearchForm(item.get("title").asText(), item.get("description").asText(), item.get("link").asText()));
                 }
             }
 
@@ -55,11 +55,11 @@ public class ApiService {
         return returnPage;
     }
 
-    public List<PageView> googleSearch(String query) {
+    public List<SearchForm> googleSearch(String query) {
         JsonNode resultJson = null;
         JsonNode jsonMap = null;
         HttpURLConnection connection = null;
-        List<PageView> returnPage = null;
+        List<SearchForm> returnPage = null;
         int responseCode = -1;
 
         try {
@@ -75,7 +75,7 @@ public class ApiService {
                 JsonNode item = null;
                 while (elements.hasNext()) {
                     item = elements.next();
-                    returnPage.add(new PageView(item.get("title").asText(), item.get("snippet").asText(), item.get("link").asText()));
+                    returnPage.add(new SearchForm(item.get("title").asText(), item.get("snippet").asText(), item.get("link").asText()));
                 }
             }
 
