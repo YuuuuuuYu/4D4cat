@@ -61,7 +61,7 @@ function renderingData(list) {
 
     list.forEach(function(data) {
         htmlForm += '<li>';
-        htmlForm += '<h3>'+data.title+'</h3>';
+        htmlForm += '<h4>'+data.title+'</h4>';
         htmlForm += '<p>'+data.content+'</p>';
         htmlForm += '<a href="'+data.link+'" target="_blank">Read more</a>';
         htmlForm += '</li>';
