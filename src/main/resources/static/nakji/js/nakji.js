@@ -4,10 +4,7 @@ window.onload = function() {
 };
 
 function renderingPage(form) {
-    let resultDiv = document.getElementById("page");
-    const htmlForm = form;
-
-    resultDiv.innerHTML = htmlForm;
+    document.getElementById("page").innerHTML = form;
 }
 
 function callAPI(url) {
