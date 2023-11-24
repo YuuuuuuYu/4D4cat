@@ -1,3 +1,11 @@
+- 2023-11-24
+[완료]
+openFeign 테스트
+
+[예정]
+HttpUrlConnection -> OpenFeign 전환
+OpenFeign으로 구현된 공통 클라이언트 객체 필요
+
 - 2023-11-16
 [완료]
 개인 프로필 영역 수정
