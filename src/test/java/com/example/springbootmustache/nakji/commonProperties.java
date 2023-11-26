@@ -9,9 +9,10 @@ import org.json.JSONException;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
 public class commonProperties {
@@ -26,22 +27,19 @@ public class commonProperties {
     protected final static String GOOGLE_CX = "c7afc5a33141f45f6";
 
     protected JsonNode readBody(InputStream body){
-        InputStreamReader streamReader = new InputStreamReader(body, Charset.forName("UTF-8"));
+        InputStreamReader streamReader = new InputStreamReader(body, StandardCharsets.UTF_8);
 
         try (BufferedReader lineReader = new BufferedReader(streamReader)) {
             StringBuilder responseBody = new StringBuilder();
 
-            String line;
-            while ((line = lineReader.readLine()) != null) {
-                responseBody.append(line);
-            }
+            responseBody.append(lineReader.lines().collect(Collectors.joining("\n")));
 
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(responseBody.toString());
 
             return jsonNode;
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
 
         }
 
