@@ -1,26 +1,24 @@
 package com.example.springbootmustache.nakji;
 
 import com.example.springbootmustache.nakji.Iface.NaverOpenFeignClient;
+import com.fasterxml.jackson.databind.JsonNode;
 import feign.Feign;
 import feign.Response;
 import feign.gson.GsonDecoder;
 import feign.gson.GsonEncoder;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.stream.Collectors;
 
-public class naverApiClientExample {
+public class naverApiClientExample extends commonProperties  {
 
     private static final String NAVER_API_BASE_URL = "https://openapi.naver.com";
 
     @Test
     void naverSearchTest() throws IOException {
         String query = "bag";
+        JsonNode resultJson = null;
+        JsonNode jsonMap = null;
 
         NaverOpenFeignClient client = Feign.builder()
                 .encoder(new GsonEncoder())
@@ -30,9 +28,9 @@ public class naverApiClientExample {
         try (Response response = client.search(query)) {
 
             if (response.status() == 200) {
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(response.body().asInputStream(), StandardCharsets.UTF_8))) {
-                    System.out.println(br.lines().collect(Collectors.joining("\n")));
-                }
+                resultJson = readBody(response.body().asInputStream());
+                jsonMap = resultJson.findValue("items");
+                System.out.println(jsonMap.toString());
             } else {
                 System.err.println("Error Response: " + response.toString());
             }
