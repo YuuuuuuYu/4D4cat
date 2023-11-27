@@ -8,7 +8,6 @@ import feign.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -51,17 +50,12 @@ public class ApiService {
     public List<SearchForm> googleSearch(String query) {
         JsonNode resultJson = null;
         JsonNode jsonMap = null;
-        HttpURLConnection connection = null;
         List<SearchForm> returnPage = null;
-        int responseCode = -1;
 
-        try {
-            connection = nakji.googleSearchConnection(query);
-            responseCode = connection.getResponseCode();
-            returnPage = new ArrayList<>();
-
-            if (responseCode == HttpURLConnection.HTTP_OK){
-                resultJson = commonService.readBody(connection.getInputStream());
+        try (Response response = nakji.googleSearchConnection(query)) {
+            if (response.status() == 200){
+                returnPage = new ArrayList<>();
+                resultJson = commonService.readBody(response.body().asInputStream());
                 jsonMap = resultJson.findValue("items");
 
                 Iterator<JsonNode> elements = jsonMap.elements();
@@ -74,9 +68,6 @@ public class ApiService {
 
         } catch(Exception e) {
             e.printStackTrace();
-
-        } finally {
-            if (connection != null) connection.disconnect();
         }
 
         return returnPage;
