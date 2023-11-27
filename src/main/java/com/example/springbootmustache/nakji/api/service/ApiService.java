@@ -4,6 +4,7 @@ import com.example.springbootmustache.nakji.common.CommonService;
 import com.example.springbootmustache.nakji.config.NakjiProperty;
 import com.example.springbootmustache.nakji.model.SearchForm;
 import com.fasterxml.jackson.databind.JsonNode;
+import feign.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,20 +22,15 @@ public class ApiService {
     @Autowired
     CommonService commonService;
 
-    public List<SearchForm> naverSearch(String query) {
+    public List<SearchForm> naverSearch(String serviceId, String query) {
         JsonNode resultJson = null;
         JsonNode jsonMap = null;
-        HttpURLConnection connection = null;
         List<SearchForm> returnPage = null;
-        int responseCode = -1;
 
-        try {
-            connection = nakji.naverSearchConnection("", query);
-            responseCode = connection.getResponseCode();
-            returnPage = new ArrayList<>();
-
-            if (responseCode == HttpURLConnection.HTTP_OK){
-                resultJson = commonService.readBody(connection.getInputStream());
+        try (Response response = nakji.naverSearchConnection(serviceId, query)) {
+            if (response.status() == 200){
+                returnPage = new ArrayList<>();
+                resultJson = commonService.readBody(response.body().asInputStream());
                 jsonMap = resultJson.findValue("items");
 
                 Iterator<JsonNode> elements = jsonMap.elements();
@@ -47,9 +43,6 @@ public class ApiService {
 
         } catch(Exception e) {
             e.printStackTrace();
-
-        } finally {
-            if (connection != null) connection.disconnect();
         }
 
         return returnPage;

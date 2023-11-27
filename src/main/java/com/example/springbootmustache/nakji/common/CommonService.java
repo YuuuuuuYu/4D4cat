@@ -10,28 +10,22 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @SuppressWarnings("unchecked")
 public class CommonService {
 
     public JsonNode readBody(InputStream body){
-        InputStreamReader streamReader = new InputStreamReader(body, Charset.forName("UTF-8"));
+        InputStreamReader streamReader = new InputStreamReader(body, StandardCharsets.UTF_8);
 
         try (BufferedReader lineReader = new BufferedReader(streamReader)) {
-            StringBuilder responseBody = new StringBuilder();
-
-            String line;
-            while ((line = lineReader.readLine()) != null) {
-                responseBody.append(line);
-            }
-
+            String responseBody = lineReader.lines().collect(Collectors.joining("\n"));
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode jsonNode = objectMapper.readTree(responseBody.toString());
 
-            return jsonNode;
+            return objectMapper.readTree(responseBody);
         } catch (IOException e) {
             throw new RuntimeException("API 응답을 읽는 데 실패했습니다.", e);
         }

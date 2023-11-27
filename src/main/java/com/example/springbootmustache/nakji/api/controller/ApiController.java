@@ -18,9 +18,10 @@ public class ApiController {
     ApiService apiService;
 
     @GetMapping("/naver")
-    public List<SearchForm> naverSearchApi(@RequestParam(name = "query", required = false) String query) {
+    public List<SearchForm> naverSearchApi(@RequestParam(name = "serviceId", required = false) String serviceId
+                                           , @RequestParam(name = "query", required = false) String query) {
 
-        return apiService.naverSearch(query);
+        return apiService.naverSearch(serviceId, query);
     }
 
     @GetMapping("/google")
