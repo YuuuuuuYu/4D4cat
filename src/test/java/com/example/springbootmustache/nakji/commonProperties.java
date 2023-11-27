@@ -1,16 +1,22 @@
 package com.example.springbootmustache.nakji;
 
+import com.example.springbootmustache.nakji.Iface.GoogleAccessCodeClient;
+import com.example.springbootmustache.nakji.Iface.GoogleAccessTokenClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import feign.Feign;
+import feign.Response;
+import feign.gson.GsonEncoder;
 import org.json.JSONException;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +28,7 @@ public class commonProperties {
     protected final static String NAVER_ID = "DXUdYJLVPWaC2kxD_PUm";
     protected final static String NAVER_KEY = "SFvAihes1e";
     protected final static String GOOGLE_CLIENT_ID = "895857791329-mi3g48445im7h7o1lceoslcef0vgg30u.apps.googleusercontent.com";
-    protected final static String GOOGLE_CLIENT_SECRET = "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";
+    protected final static String GOOGLE_CLIENT_SECRET = "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";
     protected final static String GOOGLE_KEY = "AIzaSyBxdEGZKno9zIewJzFjMzCqngx_dxuWdHE";
     protected final static String GOOGLE_CX = "c7afc5a33141f45f6";
 
@@ -60,74 +66,73 @@ public class commonProperties {
     }
 
     protected String getActiveCode() {
-        String host = "https://accounts.google.com/o/oauth2/v2/auth";
-        String scope = "https://www.googleapis.com/auth/bigquery.readonly";
-        String redirect_uri = "http://localhost:8888/nakji/code";
+        String url = "https://accounts.google.com";
+        String scope = URLEncoder.encode("https://www.googleapis.com/auth/bigquery.readonly", StandardCharsets.UTF_8);
+        String redirect_uri = URLEncoder.encode("http://localhost:8888/nakji/code", StandardCharsets.UTF_8);
         String response_type = "code";
-        StringBuilder text = new StringBuilder();
+        String access_type = "online";
         String activeCode = null;
 
-        URL url = null;
-        HttpURLConnection connection = null;
-        try {
-            text.append(host);
-            text.append("?scope=").append(scope).append("&response_type=").append(response_type)
-                    .append("&client_id=").append(GOOGLE_CLIENT_ID).append("&redirect_uri=").append(redirect_uri);
-            url = new URL(text.toString());
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
+        GoogleAccessCodeClient client = Feign.builder()
+                .encoder(new GsonEncoder())
+                .target(GoogleAccessCodeClient.class, url);
 
-            int responseCode = connection.getResponseCode();
-            System.out.println(responseCode);
+        try (Response response = client.getAccessCode(scope, response_type, GOOGLE_CLIENT_ID, redirect_uri, access_type)) {
+            System.out.println(response.request());
+            if (response.status() == 200) {
+                System.out.println(readBody(response.body().asInputStream()));
 
+            } else {
+                System.err.println("Error Response: " + response.toString());
+            }
+
+/*
             String redirectedUrl = connection.getURL().getQuery().split("&")[0];
             System.out.println("Redirected URL: " + redirectedUrl);
 
             if (redirectedUrl.contains("authError")) return activeCode;
 
-            activeCode = redirectedUrl.replace("code=", "");
+            activeCode = redirectedUrl.replace("code=", "");*/
             System.out.println(activeCode);
 
         } catch(Exception e) {
             e.printStackTrace();
-
-        } finally {
-            if(connection != null) connection.disconnect();
         }
 
         return activeCode;
     }
 
     protected String getAccessToken() {
-        String tokenUrl = "https://oauth2.googleapis.com/token";
+        String url = "https://oauth2.googleapis.com";
+        String grand_type = "authorization_code";
+        String redirect_uri = "http://localhost:8888/nakji/code";
+        String activeCode = "4/0AfJohXkQv8Zh-pZ1kU6TQ9CKMRV7RQVWg3aiZ1YKktMKREGZAaNbDLQtFMDQd_eSn5ktfQ";
+        String accessToken = "";
 
-        URL url = null;
-        HttpURLConnection connection = null;
-        try {
-            String requestBody = "{\"Authorization\":\"Basic " + Base64.getEncoder().encodeToString((GOOGLE_CLIENT_ID + ":" + GOOGLE_CLIENT_SECRET).getBytes()) + "\"}";
-            url = new URL(tokenUrl);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "x-www-form-urlencoded; charset=UTF-8");
-            connection.setRequestProperty("Authorization", requestBody);
-            connection.setRequestProperty("Content-Length", Integer.toString(requestBody.getBytes().length)); // Content-Length 헤더 추가
+        StringBuilder param = new StringBuilder();
 
-            // 요청 본문 전송
-            connection.setDoOutput(true);
-            try (OutputStream outputStream = connection.getOutputStream()) {
-                outputStream.write(requestBody.getBytes("UTF-8"));
+        GoogleAccessTokenClient client = Feign.builder()
+                .target(GoogleAccessTokenClient.class, url);
+
+        param.append("code=").append(activeCode)
+            .append("&client_id=").append(GOOGLE_CLIENT_ID)
+            .append("&client_secret=").append(GOOGLE_CLIENT_SECRET)
+            .append("&redirect_uri=").append(URLEncoder.encode(redirect_uri, StandardCharsets.UTF_8))
+            .append("&grant_type=").append(grand_type);
+
+        try (Response response = client.getAccessToken(param.toString())) {
+            System.out.println(response.request());
+            if (response.status() == 200) {
+                System.out.println(readBody(response.body().asInputStream()));
+
+            } else {
+                System.err.println("Error Response: " + response.toString());
             }
-            int responseCode = connection.getResponseCode();
-            System.out.println(responseCode);
-            System.out.println(readBody(connection.getInputStream()));
 
         } catch(Exception e) {
             e.printStackTrace();
-
-        } finally {
-            if(connection != null) connection.disconnect();
         }
 
-        return "t";
+        return accessToken;
     }
 }
