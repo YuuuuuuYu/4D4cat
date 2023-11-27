@@ -1,6 +1,11 @@
 package com.example.springbootmustache.nakji.config;
 
 import com.example.springbootmustache.common.UserProperties;
+import com.example.springbootmustache.nakji.api.client.NaverSearchClient;
+import feign.Feign;
+import feign.Response;
+import feign.gson.GsonDecoder;
+import feign.gson.GsonEncoder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -49,7 +54,7 @@ public class NakjiProperty extends UserProperties {
         return srcUrl;
     }
 
-    public HttpURLConnection naverSearchConnection(String id, String search) {
+    /*public HttpURLConnection naverSearchConnection(String id, String search) {
         String query = "".equals(nvl(search)) ? "bag" : search;
         String serviceId = "".equals(id) ? "blog.json" : id;
         String host = "https://openapi.naver.com/v1/search/"+serviceId;
@@ -71,6 +76,22 @@ public class NakjiProperty extends UserProperties {
         }
 
         return connection;
+    }*/
+
+    public Response naverSearchConnection(String id, String search) {
+        Response response = null;
+        String query = "".equals(nvl(search)) ? "bag" : search;
+        String serviceId = "".equals(nvl(id)) ? "blog.json" : id;
+        String url = "https://openapi.naver.com";
+
+        NaverSearchClient client = Feign.builder()
+                                    .encoder(new GsonEncoder())
+                                    .decoder(new GsonDecoder())
+                                    .target(NaverSearchClient.class, url);
+
+        response = client.search(NAVER_ID, NAVER_KEY, serviceId, query);
+
+        return response;
     }
 
     public HttpURLConnection googleSearchConnection(String search) {
