@@ -18,3 +18,5 @@ profile:
     NAVER_KEY: 'SFvAihes1e'
     GOOGLE_KEY: 'AIzaSyBxdEGZKno9zIewJzFjMzCqngx_dxuWdHE'
     GOOGLE_CX: 'c7afc5a33141f45f6'
+    GOOGLE_CLIENT_ID: '895857791329-mi3g48445im7h7o1lceoslcef0vgg30u.apps.googleusercontent.com'
+    GOOGLE_CLIENT_SECRET: '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'
