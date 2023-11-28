@@ -72,4 +72,32 @@ public class ApiService {
 
         return returnPage;
     }
+
+    public String getActiveCode(String param) {
+        String scope = "https://www.googleapis.com/auth/bigquery.readonly";
+        String redirect_uri = "http://localhost:8888/nakji/api"+param;
+
+        return nakji.activeCodeApi(scope, redirect_uri);
+    }
+
+    public String getAccessToken(String code) {
+        String redirect_uri = "http://localhost:8888/nakji/api/admin/token";
+        String accessToken = null;
+        JsonNode resultJson = null;
+
+        try (Response response = nakji.accessTokenApi(redirect_uri, code)) {
+            if (response.status() == 200) {
+                resultJson = commonService.readBody(response.body().asInputStream());
+                accessToken = resultJson.findValue("access_token").textValue();
+
+            } else {
+                System.err.println("Error Response: " + response.toString());
+            }
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return accessToken;
+    }
 }
