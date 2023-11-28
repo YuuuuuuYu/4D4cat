@@ -11,10 +11,12 @@ import feign.Response;
 import feign.gson.GsonEncoder;
 import org.json.JSONException;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -67,10 +69,10 @@ public class commonProperties {
 
     protected String getActiveCode() {
         String url = "https://accounts.google.com";
-        String scope = URLEncoder.encode("https://www.googleapis.com/auth/bigquery.readonly", StandardCharsets.UTF_8);
-        String redirect_uri = URLEncoder.encode("http://localhost:8888/nakji/code", StandardCharsets.UTF_8);
+        String scope = "https://www.googleapis.com/auth/bigquery.readonly";
+        String redirect_uri = "http://localhost:8888/nakji/api/simpleToken";
         String response_type = "code";
-        String access_type = "online";
+        String access_type = "offline";
         String activeCode = null;
 
         GoogleAccessCodeClient client = Feign.builder()
@@ -105,8 +107,8 @@ public class commonProperties {
     protected String getAccessToken() {
         String url = "https://oauth2.googleapis.com";
         String grand_type = "authorization_code";
-        String redirect_uri = "http://localhost:8888/nakji/code";
-        String activeCode = "4/0AfJohXkQv8Zh-pZ1kU6TQ9CKMRV7RQVWg3aiZ1YKktMKREGZAaNbDLQtFMDQd_eSn5ktfQ";
+        String redirect_uri = "http://localhost:8888/nakji/api/simpleToken";
+        String activeCode = "4/0AfJohXlNmIwTujo8Vcr-OWRqreRVdAGI7hWwFOVSnI_ab37sMsU1OLZ4SWMutmLqW__51A";
         String accessToken = "";
 
         StringBuilder param = new StringBuilder();
@@ -117,13 +119,13 @@ public class commonProperties {
         param.append("code=").append(activeCode)
             .append("&client_id=").append(GOOGLE_CLIENT_ID)
             .append("&client_secret=").append(GOOGLE_CLIENT_SECRET)
-            .append("&redirect_uri=").append(URLEncoder.encode(redirect_uri, StandardCharsets.UTF_8))
+            .append("&redirect_uri=").append(redirect_uri)
             .append("&grant_type=").append(grand_type);
 
         try (Response response = client.getAccessToken(param.toString())) {
             System.out.println(response.request());
             if (response.status() == 200) {
-                System.out.println(readBody(response.body().asInputStream()));
+                System.out.println(readBody(response.body().asInputStream()).findValue("access_token").textValue());
 
             } else {
                 System.err.println("Error Response: " + response.toString());
