@@ -74,7 +74,7 @@ public class ApiService {
     }
 
     public String getActiveCode(String param) {
-        String scope = "https://www.googleapis.com/auth/bigquery.readonly";
+        String scope = "https://www.googleapis.com/auth/bigquery";
         String redirect_uri = "http://localhost:8888/nakji/api"+param;
 
         return nakji.activeCodeApi(scope, redirect_uri);
