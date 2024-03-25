@@ -44,13 +44,17 @@ function toggleSearchEngine() {
     });
 }
 function toggleSearchImg(target) {
-    const imgSrc = target.src;
+    const imgSrc = target.src.slice('/assets');
+    const engine = target.alt;
+    let resultSrc;
+
     if (!imgSrc.includes('pick')) {
-        const resultSrc = imgSrc.split('.');
-        target.src = resultSrc[0] + '_pick.' + resultSrc[1];
+        resultSrc = imgSrc.replace(engine, engine+'_pick');
     } else {
-        target.src = imgSrc.replace('_pick', '');
+        resultSrc = imgSrc.replace('_pick', '');
     }
+
+    target.src = resultSrc;
 }
 function renderingData(list) {
     let resultDiv = document.getElementById("searchResult");
