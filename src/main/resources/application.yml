@@ -1,5 +1,6 @@
 server:
-  port: 8888
+  port: 80
+
   servlet:
     encoding:
       charset: 'UTF-8'
@@ -20,3 +21,18 @@ profile:
     GOOGLE_CX: 'c7afc5a33141f45f6'
     GOOGLE_CLIENT_ID: '895857791329-mi3g48445im7h7o1lceoslcef0vgg30u.apps.googleusercontent.com'
     GOOGLE_CLIENT_SECRET: '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'
+
+spring:
+  datasource:
+    url: 'jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE'
+    username: 'test'
+    password: 'test'
+  h2:
+    console:
+      enabled: true
+      path: '/h2-console'
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

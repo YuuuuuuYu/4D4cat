@@ -2,21 +2,35 @@ package com.example.springbootmustache.nakji.board.model;
 
 import lombok.Getter;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @Getter
+@Entity
+@Table(name = "Board")
 public class Board {
 
-    private Long board_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long boardId;
 
+    @Column
     private String title;
+    @Column
     private String content;
-    private int writer_id;
-    private Long view_cnt;
-    private String use_yn;
+    @Column
+    private int writerId;
+    @Column
+    private Long viewCnt;
+    @Column
+    private String useYn;
 
-    private int create_id;
-    private Date create_date;
-    private int update_id;
-    private Date update_date;
+    @Column
+    private int createId;
+    @Column
+    private Date createDate;
+    @Column
+    private int updateId;
+    @Column
+    private Date updateDate;
 }
