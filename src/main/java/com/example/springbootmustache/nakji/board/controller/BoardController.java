@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/nakji/board")
-public class boardController {
+public class BoardController {
 
     @GetMapping("/")
     public PageView index(PageView pageView) {
