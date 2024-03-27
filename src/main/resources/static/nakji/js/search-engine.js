@@ -21,7 +21,7 @@ function setSearchEngine() {
     }
 
     document.getElementById("btn_search").onclick = function() {
-        doSearch();
+        doSearch().then();
     };
 }
 function toggleSearchEngine() {
@@ -74,9 +74,9 @@ function renderingData(list) {
     htmlForm += '</ul>';
     resultDiv.innerHTML = htmlForm;
 }
-function doSearch() {
+async function doSearch() {
     const engine = document.querySelector('div#search-engine button.active');
-    let query = document.getElementById("ipt_search").value;
+    const query = document.getElementById("ipt_search").value;
 
     if(engine == null) {
         alert('검색 엔진을 선택해주세요.');
@@ -88,17 +88,8 @@ function doSearch() {
         return;
     }
 
-    let url = '/nakji/api/'+engine.name+'?query='+query;
-    fetch(url)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
+    const url = '/nakji/api/'+engine.name+'?query='+query;
+    const resultAPI = await callAPIGet(url, '');
 
-            } else {
-                throw new Error("네트워크 응답이 정상적이지 않습니다");
-            }
-        })
-        .then(data => {
-            renderingData(data);
-        });
+    renderingData(resultAPI);
 }
