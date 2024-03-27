@@ -7,16 +7,22 @@ function renderingPage(form) {
     document.getElementById("page").innerHTML = form;
 }
 
-function callAPI(url) {
-    fetch(url)
+async function callAPIGet(url, params) {
+    let result = [];
+    await axios.get(url, {params: params})
         .then(response => {
-            if (response.ok) {
-                return response.json();
+            if (response.status === 200) {
+                result = response.data;
 
             } else {
-                throw new Error("네트워크 응답이 정상적이지 않습니다");
+                console.log(response.status);
+
             }
+        })
+        .catch(error => {
+            console.log(error);
+
         });
 
-    return false;
+    return result;
 }
