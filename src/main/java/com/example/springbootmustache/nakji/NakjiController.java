@@ -13,12 +13,6 @@ public class NakjiController {
     @GetMapping("/")
     public String index(Model model) {
 
-        return "main";
-    }
-
-    @GetMapping("/{path}")
-    public String getView(@PathVariable String path) {
-
-        return "nakji/"+path;
+        return "/nakji/main";
     }
 }
