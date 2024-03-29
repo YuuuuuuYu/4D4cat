@@ -3,7 +3,14 @@
 {{>nakji/lnb}}
 
 <main id="main" class="container">
-    <section id="page">{{>nakji/lnb/labs/labs_intro}}</section>
+    <section id="page">
+        {{#labsIntro}}
+            {{>nakji/lnb/labs/labs_intro}}
+        {{/labsIntro}}
+        {{#labsMdEditor}}
+            {{>nakji/lnb/labs/labs_MD_Editor}}
+        {{/labsMdEditor}}
+    </section>
     <section id="search" class="search">
         <div id="searchResult" class="section-title"></div>
     </section>
