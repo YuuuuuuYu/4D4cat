@@ -1,0 +1,47 @@
+/* 기본 레이아웃 및 스타일 */
+.marked-content {
+    display: flex;
+    flex-direction: row;
+    max-width: 1400px; /* 최대 너비 설정 */
+    margin: auto; /* 중앙 정렬 */
+    gap: 20px; /* 영역 사이 간격 */
+}
+
+.editor-area, .preview-area {
+    flex: 1;
+    border: 1px solid #ccc; /* 경계선 추가 */
+    overflow: auto; /* 내용이 많을 경우 스크롤 */
+}
+
+/* 텍스트 영역 스타일 */
+#edit-text {
+    width: 100%;
+    font-family: monospace; /* 폰트 스타일 */
+}
+
+/* 미리보기 영역 스타일 */
+#preview-area {
+    background-color: #f9f9f9; /* 배경색 */
+}
+
+/* 버튼 스타일 */
+#btn-convert {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px; /* 버튼과 텍스트 영역 사이의 마진 */
+}
+
+#btn-convert:hover {
+    background-color: #0056b3;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .marked-content {
+        flex-direction: column;
+    }
+}
