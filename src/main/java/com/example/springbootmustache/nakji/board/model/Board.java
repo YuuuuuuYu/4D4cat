@@ -1,17 +1,20 @@
 package com.example.springbootmustache.nakji.board.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 
-import javax.persistence.*;
+
 import java.util.Date;
 
 @Getter
 @Entity
-@Table(name = "Board")
+@Table(name="board")
 public class Board {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardId;
 
     @Column
