@@ -10,6 +10,9 @@ server:
 logging:
   level:
     org.springframework.boot.context.event: warn
+    org:
+      springframework:
+        web: DEBUG
 
 profile:
   nakji:
