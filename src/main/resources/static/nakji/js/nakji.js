@@ -1,10 +1,14 @@
-window.onload = function() {
+window.onload = function () {
     setSearchEngine();
     toggleSearchEngine();
+    renderingPage('/nakji/page/intro', '');
 };
 
-function renderingPage(form) {
-    document.getElementById("page").innerHTML = form;
+async function renderingPage(url, data) {
+    const template = await callAPIGet(url, '');
+    const page = Mustache.render(template, data);
+
+    document.getElementById('page').innerHTML = page;
 }
 
 async function callAPIGet(url, params) {
