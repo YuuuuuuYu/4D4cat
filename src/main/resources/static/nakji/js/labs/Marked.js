@@ -1,7 +1,8 @@
 import {marked} from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 
-function init() {
-    const preText = `
+export const Marked = {
+    init: function() {
+        const preText = `
 # 마크다운 예시
 
 이것은 마크다운 형식의 **본문 텍스트**입니다. _이탤릭체_와 **굵은 글씨**를 사용할 수 있습니다.
@@ -25,17 +26,18 @@ function init() {
 
 \`인라인 코드\`는 이렇게 사용합니다.
 `;
-    document.getElementById('edit-text').value = preText;
-    document.getElementById('preview-area').innerHTML = marked.parse(preText);
-}
+        document.getElementById('edit-text').innerText = preText;
+        document.getElementById('preview-area').innerHTML = marked.parse(preText);
 
-function convert() {
-    const edit_text = document.getElementById('edit-text').value;
-    document.getElementById('preview-area').innerHTML = marked.parse(edit_text);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('btn-convert').addEventListener('click', convert);
-});
-
-init();
+        Marked.setConvertBtn();
+    },
+    convert: function() {
+        const edit_text = document.getElementById('edit-text').value;
+        document.getElementById('preview-area').innerHTML = marked.parse(edit_text);
+    },
+    setConvertBtn: function() {
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('btn-convert').addEventListener('click', Marked.convert);
+        });
+    }
+};
