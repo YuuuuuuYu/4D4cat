@@ -1,6 +1,6 @@
 import {marked} from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 
-export const Marked = {
+window.Marked = {
     init: function() {
         const preText = `
 # 마크다운 예시
@@ -26,7 +26,7 @@ export const Marked = {
 
 \`인라인 코드\`는 이렇게 사용합니다.
 `;
-        document.getElementById('edit-text').innerText = preText;
+        document.getElementById('edit-text').value = preText;
         document.getElementById('preview-area').innerHTML = marked.parse(preText);
 
         Marked.setConvertBtn();
@@ -36,8 +36,6 @@ export const Marked = {
         document.getElementById('preview-area').innerHTML = marked.parse(edit_text);
     },
     setConvertBtn: function() {
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('btn-convert').addEventListener('click', Marked.convert);
-        });
+        document.getElementById('btn-convert').addEventListener('click', Marked.convert);
     }
 };
