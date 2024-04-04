@@ -1,7 +1,7 @@
 window.onload = function () {
     setSearchEngine();
     toggleSearchEngine();
-    renderingPage('/nakji/page/intro', '');
+    renderingPage('/nakji/page/intro');
 };
 
 async function renderingPage(url, func) {
@@ -9,6 +9,7 @@ async function renderingPage(url, func) {
     const page = Mustache.render(template, '');
 
     document.getElementById('page').innerHTML = page;
+    if (func !== undefined) func.init();
 }
 
 async function callAPIGet(url, params) {
