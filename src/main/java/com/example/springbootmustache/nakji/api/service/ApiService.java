@@ -14,12 +14,13 @@ import java.util.List;
 
 @Service
 public class ApiService {
+    private final NakjiProperty nakji;
+    private final CommonService commonService;
 
-    @Autowired
-    NakjiProperty nakji;
-
-    @Autowired
-    CommonService commonService;
+    public ApiService(CommonService commonService, NakjiProperty nakji) {
+        this.commonService = commonService;
+        this.nakji = nakji;
+    }
 
     public List<SearchForm> naverSearch(String serviceId, String query) {
         JsonNode resultJson = null;

@@ -14,9 +14,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/nakji/api")
 public class ApiController {
+    private final ApiService apiService;
 
-    @Autowired
-    ApiService apiService;
+    public ApiController(ApiService apiService) {
+        this.apiService = apiService;
+    }
 
     @GetMapping("/naver")
     @ResponseBody
