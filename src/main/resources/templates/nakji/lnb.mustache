@@ -14,14 +14,14 @@
         <nav id="navbar" class="nav-menu navbar">
             <ul>
                 <li><a href="/nakji/" class="nav-link"><i class="bx bx-home"></i><span>Home</span></a></li>
+                <li><a href="javascript:void(0);" class="nav-link" onclick="renderingPage('/nakji/page/lnb-about');">
+                    <i class="material-icons">info</i><span>About</span></a></li>
                 <li><a href="javascript:void(0);" class="nav-link" onclick="renderingPage('/nakji/page/lnb-board');">
                         <i class="material-icons">list</i><span>Board</span></a></li>
                 <li><a href="javascript:void(0);" class="nav-link" onclick="renderingPage('/nakji/page/lnb-labs');">
                         <i class="material-symbols-outlined">experiment</i><span>Labs</span></a></li>
-                <li>
-                    <div id="search-engine" role="group" aria-label="select search engine"></div>
-                    <div class="input-group">
-                        <input type="text" name="search" id="ipt_search" placeholder="Search Query">
+                <li><div id="search-engine" role="group" aria-label="select search engine"></div>
+                    <div class="input-group"><input type="text" name="search" id="ipt_search" placeholder="Search Query">
                         <a href="javascript:void(0)"><i id="btn_search" class="material-icons">search</i></a>
                     </div>
                 </li>
