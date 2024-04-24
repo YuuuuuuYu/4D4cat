@@ -1,0 +1,33 @@
+window.onload = function () {
+    setSearchEngine();
+    toggleSearchEngine();
+    renderingPage('/nakji/page/intro');
+};
+
+async function renderingPage(url, func) {
+    const template = await callAPIGet(url, '');
+    const page = Mustache.render(template, '');
+
+    document.getElementById('page').innerHTML = page;
+    if (func !== undefined) func.init();
+}
+
+async function callAPIGet(url, params) {
+    let result = [];
+    await axios.get(url, {params: params})
+        .then(response => {
+            if (response.status === 200) {
+                result = response.data;
+
+            } else {
+                console.log(response.status);
+
+            }
+        })
+        .catch(error => {
+            console.log(error);
+
+        });
+
+    return result;
+}
