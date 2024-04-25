@@ -5,15 +5,19 @@ import com.example.springbootmustache.nakji.config.NakjiProperty;
 import com.example.springbootmustache.nakji.model.SearchForm;
 import com.fasterxml.jackson.databind.JsonNode;
 import feign.Response;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ApiService {
+    private static final Logger log = LoggerFactory.getLogger(ApiService.class);
     private final NakjiProperty nakji;
     private final CommonService commonService;
 
@@ -100,5 +104,29 @@ public class ApiService {
         }
 
         return accessToken;
+    }
+
+    public String openAIGpt(String prompt) {
+        if (Optional.ofNullable(prompt).orElse("").isEmpty()) return "";
+
+        JsonNode resultJson = null;
+        JsonNode jsonMap = null;
+        String model = "gpt-4";
+        String requestBody = "{\"messages\":[{\"role\":\"user\", \"content\":\""+prompt+"\"}],\"model\":\""+model+"\"}";
+
+        try (Response response = nakji.openAIGptConnection(requestBody)) {
+            if (response.status() == 200){
+                resultJson = commonService.readBody(response.body().asInputStream());
+                jsonMap = resultJson.at("/choices/0/message/content");
+
+            } else {
+                System.err.println("Error Response: " + new String(response.body().asInputStream().readAllBytes(), StandardCharsets.UTF_8));
+            }
+
+        } catch(Exception e) {
+            log.error("Service openAIGpt Error: \n" + e.toString());
+        }
+
+        return jsonMap.toString();
     }
 }

@@ -1,3 +1,9 @@
+/*
+******************
+***** Marked *****
+******************
+*/
+
 /* 기본 레이아웃 및 스타일 */
 .marked-content {
     display: flex;
@@ -43,5 +49,85 @@
 @media (max-width: 768px) {
     .marked-content {
         flex-direction: column;
+    }
+}
+
+
+
+/*
+******************
+***** OpenAI *****
+******************
+*/
+.call-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin-top: 20px;
+}
+.call-button:hover {
+    background-color: #45a049;
+}
+.gpt-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+.prompt-area, .response-area {
+    margin-bottom: 20px;
+}
+.gpt-content h3 {
+    margin-top: 0;
+    color: #333;
+}
+input#prompt-text {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+.response-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.response-time {
+    background-color: #e7f3ec;
+    color: #4CAF50;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+#response-area {
+    background-color: #f8f8f8;
+    border-left: 5px solid #4CAF50;
+    padding: 10px;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto; /* 스크롤 가능하게 설정 */
+}
+.response-area-content {
+    margin: 0;
+}
+@media (max-width: 600px) {
+    .call-button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    .gpt-content {
+        padding: 10px;
+    }
+    input#prompt-text {
+        padding: 6px;
     }
 }
