@@ -5,7 +5,8 @@ window.onload = function () {
 };
 
 async function renderingPage(url, func) {
-    const template = await callAPIGet(url, '');
+    const result = await callAPIGet(url, '');
+    const template = result.data;
     const page = Mustache.render(template, '');
 
     document.getElementById('page').innerHTML = page;
@@ -14,10 +15,15 @@ async function renderingPage(url, func) {
 
 async function callAPIGet(url, params) {
     let result = [];
+    const startTime = Date.now();
+
     await axios.get(url, {params: params})
         .then(response => {
+            const endTime = Date.now();
+            result.time = ((endTime - startTime) / 1000).toFixed(2) + 's';
+
             if (response.status === 200) {
-                result = response.data;
+                result.data = response.data;
 
             } else {
                 console.log(response.status);
