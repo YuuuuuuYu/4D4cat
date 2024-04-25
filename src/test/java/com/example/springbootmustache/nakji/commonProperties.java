@@ -11,28 +11,18 @@ import feign.Response;
 import feign.gson.GsonEncoder;
 import org.json.JSONException;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
 public class commonProperties {
-
-    //private final static String ID = System.getProperty("api.naver.id");
-    //private final static String KEY = System.getProperty("api.naver.key");
-    protected final static String NAVER_ID = "DXUdYJLVPWaC2kxD_PUm";
-    protected final static String NAVER_KEY = "SFvAihes1e";
-    protected final static String GOOGLE_CLIENT_ID = "895857791329-mi3g48445im7h7o1lceoslcef0vgg30u.apps.googleusercontent.com";
-    protected final static String GOOGLE_CLIENT_SECRET = "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";
-    protected final static String GOOGLE_KEY = "AIzaSyBxdEGZKno9zIewJzFjMzCqngx_dxuWdHE";
-    protected final static String GOOGLE_CX = "c7afc5a33141f45f6";
+    protected final static String GOOGLE_CLIENT_ID = "";
+    protected final static String GOOGLE_CLIENT_SECRET = "";
 
     protected JsonNode readBody(InputStream body){
         InputStreamReader streamReader = new InputStreamReader(body, StandardCharsets.UTF_8);
