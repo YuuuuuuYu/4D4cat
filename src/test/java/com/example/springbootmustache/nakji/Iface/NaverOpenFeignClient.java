@@ -12,8 +12,8 @@ public interface NaverOpenFeignClient {
     @Headers({
             "Content-Type: application/json;charset=UTF-8",
             "Accept-Charset: UTF-8",
-            "X-Naver-Client-Id: DXUdYJLVPWaC2kxD_PUm",
-            "X-Naver-Client-Secret: SFvAihes1e"
+            "X-Naver-Client-Id: {client_id}",
+            "X-Naver-Client-Secret: {client_secret}"
     })
     Response search(@Param("query") String query);
 }
