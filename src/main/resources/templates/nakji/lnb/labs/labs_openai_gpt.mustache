@@ -1,8 +1,14 @@
+<button id="btn-call" class="call-button" type="button">Call</button>
 <div class="gpt-content">
     <div class="prompt-area">
-        <input id="prompt-text" aria-label="gpt prompt" />
+        <h3>Request</h3>
+        <input id="prompt-text" aria-label="gpt prompt" autocomplete="off" />
     </div>
-    <div id="response-area" class="response-area">
-        <p class="response-area-label"></p>
+    <div class="response-area">
+        <div class="response-header">
+            <h3>Response</h3>
+            <span class="response-time">-- s</span>
+        </div>
+        <div class="response-area-content">프롬프트를 입력 후 Call을 눌러주세요</div>
     </div>
 </div>

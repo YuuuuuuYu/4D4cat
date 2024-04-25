@@ -4,6 +4,7 @@ import com.example.springbootmustache.common.UserProperties;
 import com.example.springbootmustache.nakji.api.client.GoogleAccessTokenClient;
 import com.example.springbootmustache.nakji.api.client.GoogleSearchClient;
 import com.example.springbootmustache.nakji.api.client.NaverSearchClient;
+import com.example.springbootmustache.nakji.api.client.OpenAIGptClient;
 import feign.Feign;
 import feign.Response;
 import feign.gson.GsonDecoder;
@@ -14,14 +15,15 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "profile.nakji")
 public class NakjiProperty extends UserProperties {
-    private String imgUrl;
-    private String srcUrl;
-    private String NAVER_ID;
-    private String NAVER_KEY;
-    private String GOOGLE_KEY;
-    private String GOOGLE_CX;
-    private String GOOGLE_CLIENT_ID;
-    private String GOOGLE_CLIENT_SECRET;
+    private static String imgUrl;
+    private static String srcUrl;
+    private static String NAVER_ID;
+    private static String NAVER_KEY;
+    private static String GOOGLE_KEY;
+    private static String GOOGLE_CX;
+    private static String GOOGLE_CLIENT_ID;
+    private static String GOOGLE_CLIENT_SECRET;
+    private static String OPENAI_KEY;
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
@@ -40,11 +42,11 @@ public class NakjiProperty extends UserProperties {
     }
 
     public void setGoogleClientId(String googleClientId) {
-        this.GOOGLE_CLIENT_ID = googleClientId;
+        GOOGLE_CLIENT_ID = googleClientId;
     }
 
     public void setGoogleClientSecret(String googleClientSecret) {
-        this.GOOGLE_CLIENT_SECRET = googleClientSecret;
+        GOOGLE_CLIENT_SECRET = googleClientSecret;
     }
 
     public void setGoogleKey(String googleKey) {
@@ -53,6 +55,10 @@ public class NakjiProperty extends UserProperties {
 
     public void setGoogleCx(String googleCx) {
         GOOGLE_CX = googleCx;
+    }
+
+    public void setOPENAI_KEY(String openai_key) {
+        OPENAI_KEY = openai_key;
     }
 
     public String getImgUrl() {
@@ -168,6 +174,16 @@ public class NakjiProperty extends UserProperties {
             .append("&grant_type=").append(grand_type);
 
         response = client.getAccessToken(param.toString());
+
+        return response;
+    }
+
+    public Response openAIGptConnection(String prompt) {
+        Response response = null;
+        String url = "https://api.openai.com";
+
+        OpenAIGptClient client = Feign.builder().target(OpenAIGptClient.class, url);
+        response = client.prompt(OPENAI_KEY, prompt);
 
         return response;
     }

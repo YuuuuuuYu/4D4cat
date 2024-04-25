@@ -2,7 +2,6 @@ package com.example.springbootmustache.nakji.api.controller;
 
 import com.example.springbootmustache.nakji.api.service.ApiService;
 import com.example.springbootmustache.nakji.model.SearchForm;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,4 +47,10 @@ public class ApiController {
         return apiService.getAccessToken(code);
     }
 
+    @GetMapping("/gpt")
+    @ResponseBody
+    public String openAIGptApi(@RequestParam(name = "prompt", required = false) String prompt) {
+
+        return apiService.openAIGpt(prompt);
+    }
 }
