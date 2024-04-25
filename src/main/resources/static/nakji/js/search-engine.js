@@ -91,5 +91,5 @@ async function doSearch() {
     const url = '/nakji/api/'+engine.name+'?query='+query;
     const resultAPI = await callAPIGet(url, '');
 
-    renderingData(resultAPI);
+    renderingData(resultAPI.data);
 }
