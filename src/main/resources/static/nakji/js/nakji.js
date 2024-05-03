@@ -11,7 +11,7 @@ window.onload = function () {
 
 async function renderingPage(url, func, bindingObj) {
     const result = await callAPIPost(url, bindingObj);
-    const template = result.data; console.log(template);
+    const template = result.data;
     const page = Mustache.render(template, '');
 
     document.getElementById('page').innerHTML = page;
