@@ -12,3 +12,38 @@ a:hover {
     width: 80px;
 
 }
+
+/* 인트로 */
+/* 기존 그리드 및 포스트 카드 스타일 유지 */
+.section-content.resume {
+    display: grid;
+    grid-template-columns: 1fr; /* 모든 화면 크기에서 하나의 열만 표시 */
+    gap: 20px;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+.section-content.resume a {
+    text-decoration: none; /* 링크 밑줄 제거 */
+    color: inherit; /* 링크 색상을 상속받아 일관성 유지 */
+    display: block; /* 링크를 블록 요소로 만들어 내부 요소를 정상적으로 포함 */
+}
+.section-content.resume a:hover {
+    text-decoration: none; /* 호버 상태에서도 밑줄 없음 */
+}
+.post-card {
+    background: #f9f9f9;
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 15px;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 5px; /* 윤곽선을 둥글게 */
+}
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+.post-card h2 {
+    margin: 0;
+    font-size: 20px;
+}
