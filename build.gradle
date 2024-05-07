@@ -18,6 +18,9 @@ ext {
 }
 
 configurations {
+    testRuntimeOnly {
+        exclude group: 'org.json', module: 'json' // 중복 제거 대상 지정
+    }
     compileOnly {
         extendsFrom annotationProcessor
     }
