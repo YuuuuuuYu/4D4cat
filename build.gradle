@@ -34,7 +34,7 @@ dependencyManagement {
 }
 
 tasks {
-    test.enabled = false
+    test.enabled = true
 }
 
 dependencies {
