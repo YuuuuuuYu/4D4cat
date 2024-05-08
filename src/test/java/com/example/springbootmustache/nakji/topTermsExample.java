@@ -10,6 +10,7 @@ import com.google.cloud.bigquery.*;
 import feign.Feign;
 import feign.Response;
 import org.json.JSONException;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.threeten.bp.Duration;
 
@@ -48,6 +49,7 @@ public class topTermsExample extends commonProperties {
     }
 
     @Test
+    @Disabled
     void googleTopTermsTest() throws JSONException {
         String projectId = "mapping-1559551857011";
         String url = "https://bigquery.googleapis.com";
@@ -103,6 +105,7 @@ public class topTermsExample extends commonProperties {
     }
 
     @Test
+    @Disabled
     void googleBigqueryConfigTest() throws InterruptedException {
         String projectId = "mapping-1559551857011";
         String token = "ya29.a0AfB_byDtM3AQEIDTmxKSRhEOg-DE4EFcMqCsurM_htQitzEeFkldA3jcly2cOBLo6mbQHR3rKuZPQbQ_f_zwvoxL_s42k4yhqWNuf8GqxdIBv75CSksqbe1SKwPIpSBYJrZfvsfuDPc53XVU-sVjH9LHTdod3tDc9AaCgYKAV0SAQ4SFQHGX2MiX_db4iymE8CcKJVk1qWImQ0169";

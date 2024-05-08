@@ -6,6 +6,7 @@ import feign.Feign;
 import feign.Response;
 import feign.gson.GsonDecoder;
 import feign.gson.GsonEncoder;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class naverApiClientExample extends commonProperties  {
     private static final String NAVER_API_BASE_URL = "https://openapi.naver.com";
 
     @Test
+    @Disabled
     void naverSearchTest() throws IOException {
         String query = "bag";
         JsonNode resultJson = null;
