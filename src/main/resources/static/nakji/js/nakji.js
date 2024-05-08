@@ -10,7 +10,7 @@ window.onload = function () {
 };
 
 async function renderingPage(url, func, bindingObj) {
-    const result = await callAPIPost(url, bindingObj);
+    const result = bindingObj !== undefined ? await callAPIPost(url, bindingObj) : await callAPIGet(url, bindingObj);
     const template = result.data;
     const page = Mustache.render(template, '');
 
