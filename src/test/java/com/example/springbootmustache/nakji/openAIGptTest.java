@@ -4,6 +4,7 @@ import com.example.springbootmustache.nakji.Iface.OpenAIGptClient;
 import com.fasterxml.jackson.databind.JsonNode;
 import feign.Feign;
 import feign.Response;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,9 +14,10 @@ import java.nio.charset.StandardCharsets;
 public class openAIGptTest extends commonProperties  {
     private static final String BASE_URL = "https://api.openai.com";
 
-    @DisplayName("GPT API 호출")
     @Test
-    void gptTest() throws IOException {
+    @Disabled
+    @DisplayName("GPT API 호출")
+    void testCallbackGptApi() throws IOException {
         JsonNode resultJson = null;
         JsonNode jsonMap = null;
 
