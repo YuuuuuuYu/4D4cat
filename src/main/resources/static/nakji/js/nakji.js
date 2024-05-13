@@ -10,12 +10,12 @@ window.onload = function () {
 };
 
 async function renderingPage(url, func, bindingObj) {
-    const result = bindingObj !== undefined ? await callAPIPost(url, bindingObj) : await callAPIGet(url, bindingObj);
+    const result = !isEmptyOrUndefined(bindingObj) ? await callAPIPost(url, bindingObj) : await callAPIGet(url, bindingObj);
     const template = result.data;
     const page = Mustache.render(template, '');
 
     document.getElementById('page').innerHTML = page;
-    if (func !== undefined) func.init();
+    if (!isEmptyOrUndefined(func)) func.init();
 }
 
 async function callAPIGet(url, params) {
@@ -87,4 +87,8 @@ async function parseRssFeedToIntro() {
     });
 
     return result;
+}
+
+function isEmptyOrUndefined(value) {
+    return value === undefined || value === '';
 }
