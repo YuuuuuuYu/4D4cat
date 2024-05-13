@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import feign.Feign;
 import feign.Response;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,6 +47,7 @@ class ApiServiceTest {
 
     @Test
     @DisplayName("OPENAI Gpt-4 Callboack Test")
+    @Disabled
     void openAIGpt() throws IOException {
         String prompt = "안녕하세요";
         String url = "https://api.openai.com";
