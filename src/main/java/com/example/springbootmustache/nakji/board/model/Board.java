@@ -1,39 +1,31 @@
 package com.example.springbootmustache.nakji.board.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 
 import java.util.Date;
 
 @Getter
+@Setter
 @Entity
 @Table(name="board")
 public class Board {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardId;
 
-    @Column
     private String title;
-    @Column
     private String content;
-    @Column
+
     private int writerId;
-    @Column
     private Long viewCnt;
-    @Column
     private String useYn;
 
-    @Column
     private int createId;
-    @Column
     private Date createDate;
-    @Column
     private int updateId;
-    @Column
     private Date updateDate;
 }
