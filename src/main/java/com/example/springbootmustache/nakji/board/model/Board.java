@@ -1,9 +1,9 @@
 package com.example.springbootmustache.nakji.board.model;
 
+import autovalue.shaded.org.jetbrains.annotations.NotNull;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 
 import java.util.Date;
 
@@ -17,10 +17,15 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardId;
 
+    @NotNull("Title cannot be null")
     private String title;
+
+    @NotNull("Content cannot be null")
     private String content;
 
+    @NotNull("Writer cannot be null")
     private int writerId;
+
     private Long viewCnt;
     private String useYn;
 
