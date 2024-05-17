@@ -8,25 +8,28 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 @Aspect
 @Component
 public class ApiLoggingAspect {
     private static final Logger logger = LoggerFactory.getLogger(ApiLoggingAspect.class);
 
-    @Pointcut("execution(* com.example.springbootmustache.nakji.api..*(..))")  // 대상 메서드 지정
+    @Pointcut("execution(* com.example.springbootmustache.nakji.api.service..*(..))")  // 대상 메서드 지정
     public void serviceMethods() {}
 
     @Around("serviceMethods()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
-        logger.info("========== Method start: {} ==========", joinPoint.getSignature().getName());
+        String arguments = Arrays.toString(joinPoint.getArgs());
+        logger.info("========== Method start: {}, Arguments: {} ==========", joinPoint.getSignature().getName(), arguments);
 
         try {
             Object result = joinPoint.proceed(); // 대상 메서드 실행
             return result;
         } finally {
-            long timeTaken = System.currentTimeMillis() - startTime;
-            logger.info("//======== Method end: {} ========//", joinPoint.getSignature().getName());
+            double timeTaken = (System.currentTimeMillis() - startTime)/1000.0;
+            logger.info("//======== Method end: {}, {}s ========//", joinPoint.getSignature().getName(), timeTaken);
         }
     }
 }
