@@ -23,7 +23,7 @@ public class BoardDto {
         dto.setBoardId(board.getBoardId());
         dto.setTitle(board.getTitle());
         dto.setContent(board.getContent());
-        dto.setWriterId(board.getWriterId());
+        dto.setWriterId(board.getUpdateId());
         dto.setViewCnt(board.getViewCnt());
         dto.setUseYn(board.getUseYn());
         dto.setUpdateDate(board.getUpdateDate());

@@ -18,7 +18,6 @@ class BoardDtoTest {
         board.setBoardId(1L);
         board.setTitle("Test Title");
         board.setContent("Test Content");
-        board.setWriterId(1);
         board.setViewCnt(0L);
         board.setUseYn("Y");
         board.setCreateId(1);
