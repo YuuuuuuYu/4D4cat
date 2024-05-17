@@ -22,13 +22,10 @@ public class Board {
 
     @NotNull("Content cannot be null")
     private String content;
-
-    @NotNull("Writer cannot be null")
-    private int writerId;
-
     private Long viewCnt;
     private String useYn;
 
+    @NotNull("createId cannot be null")
     private int createId;
     private Date createDate;
     private int updateId;

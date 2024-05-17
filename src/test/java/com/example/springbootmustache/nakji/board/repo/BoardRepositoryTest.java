@@ -28,7 +28,6 @@ class BoardRepositoryTest {
         Board board = new Board();
         board.setTitle("Test Title");
         board.setContent("Test Content");
-        board.setWriterId(1);
         board.setCreateId(1);
         board.setCreateDate(new java.util.Date());
 
