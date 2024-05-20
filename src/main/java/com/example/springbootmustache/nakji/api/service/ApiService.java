@@ -1,12 +1,12 @@
 package com.example.springbootmustache.nakji.api.service;
 
 import com.example.springbootmustache.nakji.common.CommonService;
-import com.example.springbootmustache.nakji.config.NakjiProperty;
 import com.example.springbootmustache.nakji.model.SearchForm;
 import com.fasterxml.jackson.databind.JsonNode;
 import feign.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
@@ -18,20 +18,16 @@ import java.util.Optional;
 @Service
 public class ApiService {
     private static final Logger log = LoggerFactory.getLogger(ApiService.class);
-    private final NakjiProperty nakji;
-    private final CommonService commonService;
 
-    public ApiService(CommonService commonService, NakjiProperty nakji) {
-        this.commonService = commonService;
-        this.nakji = nakji;
-    }
+    @Autowired
+    private CommonService commonService;
 
     public List<SearchForm> naverSearch(String serviceId, String query) {
         JsonNode resultJson = null;
         JsonNode jsonMap = null;
         List<SearchForm> returnPage = null;
 
-        try (Response response = nakji.naverSearchConnection(serviceId, query)) {
+        try (Response response = commonService.naverSearchConnection(serviceId, query)) {
             if (response.status() == 200){
                 returnPage = new ArrayList<>();
                 resultJson = commonService.readBody(response.body().asInputStream());
@@ -57,7 +53,7 @@ public class ApiService {
         JsonNode jsonMap = null;
         List<SearchForm> returnPage = null;
 
-        try (Response response = nakji.googleSearchConnection(query)) {
+        try (Response response = commonService.googleSearchConnection(query)) {
             if (response.status() == 200){
                 returnPage = new ArrayList<>();
                 resultJson = commonService.readBody(response.body().asInputStream());
@@ -82,7 +78,7 @@ public class ApiService {
         String scope = "https://www.googleapis.com/auth/bigquery";
         String redirect_uri = "http://localhost:8888/nakji/api"+param;
 
-        return nakji.activeCodeApi(scope, redirect_uri);
+        return commonService.activeCodeApi(scope, redirect_uri);
     }
 
     public String getAccessToken(String code) {
@@ -90,7 +86,7 @@ public class ApiService {
         String accessToken = null;
         JsonNode resultJson = null;
 
-        try (Response response = nakji.accessTokenApi(redirect_uri, code)) {
+        try (Response response = commonService.accessTokenApi(redirect_uri, code)) {
             if (response.status() == 200) {
                 resultJson = commonService.readBody(response.body().asInputStream());
                 accessToken = resultJson.findValue("access_token").textValue();
@@ -114,7 +110,7 @@ public class ApiService {
         String model = "gpt-4";
         String requestBody = "{\"messages\":[{\"role\":\"user\", \"content\":\""+prompt+"\"}],\"model\":\""+model+"\"}";
 
-        try (Response response = nakji.openAIGptConnection(requestBody)) {
+        try (Response response = commonService.openAIGptConnection(requestBody)) {
             if (response.status() == 200){
                 resultJson = commonService.readBody(response.body().asInputStream());
                 jsonMap = resultJson.at("/choices/0/message/content");

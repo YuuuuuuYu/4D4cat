@@ -60,7 +60,7 @@ class ApiServiceTest {
         Response mockResponse = client.prompt(OPENAI_KEY, prompt);
 
         // when
-        when(nakji.openAIGptConnection(requestBody)).thenReturn(mockResponse);
+        when(commonService.openAIGptConnection(requestBody)).thenReturn(mockResponse);
         String resultMsg = apiService.openAIGpt(prompt);
 
         assertNull(apiService.openAIGpt(prompt));
