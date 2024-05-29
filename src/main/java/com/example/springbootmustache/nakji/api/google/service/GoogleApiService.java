@@ -23,7 +23,7 @@ import java.util.Optional;
 public class GoogleApiService extends NakjiService {
 
     private static final String DEFAULT_QUERY = "bag";
-    private static final String BASE_URL = "https://openapi.naver.com";
+    private static final String BASE_URL = "https://www.googleapis.com";
 
     public List<SearchForm> googleSearch(String query) {
         List<SearchForm> returnPage = new ArrayList<>();
