@@ -1,4 +1,4 @@
-package com.example.springbootmustache.nakji.api.client;
+package com.example.springbootmustache.nakji.api.openai.client;
 
 import feign.Headers;
 import feign.Param;
@@ -13,5 +13,4 @@ public interface OpenAIGptClient {
             "Authorization: Bearer {AI_KEY}"
     })
     Response prompt(@Param("AI_KEY") String key, String body);
-
 }
