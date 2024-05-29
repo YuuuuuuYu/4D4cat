@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class ApiLoggingAspect {
     private static final Logger logger = LoggerFactory.getLogger(ApiLoggingAspect.class);
 
-    @Pointcut("execution(* com.example.springbootmustache.nakji.api.service..*(..))")  // 대상 메서드 지정
+    @Pointcut("execution(* com.example.springbootmustache.nakji.api.*.service..*(..))")  // 대상 메서드 지정
     public void serviceMethods() {}
 
     @Around("serviceMethods()")
