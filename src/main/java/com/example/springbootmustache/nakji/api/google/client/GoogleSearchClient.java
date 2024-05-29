@@ -1,4 +1,4 @@
-package com.example.springbootmustache.nakji.api.client;
+package com.example.springbootmustache.nakji.api.google.client;
 
 import feign.Headers;
 import feign.Param;
