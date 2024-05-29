@@ -34,17 +34,16 @@ public class GoogleApiService extends NakjiService {
                 JsonNode jsonMap = resultJson.findValue("items");
 
                 if (jsonMap != null && jsonMap.isArray()) {
-                    for (JsonNode item : jsonMap) {
-                        returnPage.add(new SearchForm(
-                                item.get("title").asText(),
-                                item.get("snippet").asText(),
-                                item.get("link").asText()
-                        ));
-                    }
-                }
+                    jsonMap.forEach(item -> {
+                        String title = Optional.ofNullable(item.get("title")).map(JsonNode::asText).orElse("");
+                        String snippet = Optional.ofNullable(item.get("snippet")).map(JsonNode::asText).orElse("");
+                        String link = Optional.ofNullable(item.get("link")).map(JsonNode::asText).orElse("");
 
+                        returnPage.add(new SearchForm(title, snippet, link));
+                    });
+                }
             } else {
-                log.info("GoogleApiService.googleSearch Request Status: {}, {}", response.status(), response.body());
+                log.info("GoogleApiService.googleSearch Request Status: {}, Body: {}", response.status(), response.body().toString());
                 throw new BadRequestException("Bad request with status: " + response.status());
             }
         } catch (Exception e) {
