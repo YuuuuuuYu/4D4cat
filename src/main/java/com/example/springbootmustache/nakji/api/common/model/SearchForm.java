@@ -1,5 +1,8 @@
-package com.example.springbootmustache.nakji.model;
+package com.example.springbootmustache.nakji.api.common.model;
 
+import lombok.Getter;
+
+@Getter
 public class SearchForm {
     private String title;
     private String content;
@@ -9,16 +12,6 @@ public class SearchForm {
         this.title = title;
         this.content = content;
         this.link = link;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-    public String getContent() {
-        return content;
-    }
-    public String getLink() {
-        return link;
     }
 
     @Override
