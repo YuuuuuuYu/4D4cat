@@ -11,7 +11,7 @@ window.openAI = {
         loading.classList.remove('hidden'); // 로딩 애니메이션 표시
 
         const prompt = document.getElementById('prompt-text').value;
-        const url = '/nakji/api/gpt?prompt='+prompt;
+        const url = '/nakji/api/gpt/search?prompt='+prompt;
         const result = await callAPIGet(url, '');
 
         document.querySelector('.response-area-content').innerHTML = result.data;
