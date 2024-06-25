@@ -1,7 +1,6 @@
 <!-- ======= Header ======= -->
 <header id="header">
     <div class="d-flex flex-column">
-
         <div class="profile">
             <img src="https://avatars.githubusercontent.com/u/37291245?v=4" alt="" class="img-fluid rounded-circle">
             <h1 class="text-light"><a href="main.mustache">Yuuuuuu Yu</a></h1>
@@ -11,7 +10,6 @@
                 <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
             </div>
         </div>
-
         <nav id="navbar" class="nav-menu navbar">
             <ul>
                 <li><a href="/nakji/" class="nav-link"><i class="bx bx-home"></i><span>Home</span></a></li>
@@ -27,7 +25,25 @@
                     </div>
                 </li>
             </ul>
-
         </nav><!-- .nav-menu -->
     </div>
+    <a href="javascript:void(0);"><span id="subscribe-button" class="material-symbols-outlined">subscriptions</span></a>
 </header><!-- End Header -->
+<!-- Popup Layer -->
+<div id="popup-subscript" class="popup-layer">
+    <div class="popup-content">
+        <span class="close-button" id="close-button">&times;</span>
+        <h2>Subscribe</h2>
+        <form id="subscribe-form">
+            <div class="form-group">
+                <label for="subscribe-nickname">Nickname:</label>
+                <input type="text" id="subscribe-nickname" name="nickname" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="subscribe-email">Email:</label>
+                <input type="email" id="subscribe-email" name="email" class="form-control" required>
+            </div>
+            <button type="button" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
