@@ -3,7 +3,7 @@ package com.example.springbootmustache.nakji.board.service;
 import com.example.springbootmustache.nakji.board.model.Board;
 import com.example.springbootmustache.nakji.board.model.BoardDto;
 import com.example.springbootmustache.nakji.board.repo.BoardRepository;
-import com.example.springbootmustache.nakji.common.CommonService;
+import com.example.springbootmustache.nakji.common.service.NakjiService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class BoardService extends CommonService{
+public class BoardService extends NakjiService {
 
     @Autowired
     private BoardRepository boardRepository;
