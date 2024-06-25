@@ -1,7 +1,6 @@
-package com.example.springbootmustache.nakji.api.controller;
+package com.example.springbootmustache.nakji.api.naver.controller;
 
-
-import com.example.springbootmustache.nakji.api.service.ApiService;
+import com.example.springbootmustache.nakji.api.naver.service.NaverApiService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,15 +19,15 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
-class ApiControllerTest {
+class NaverApiControllerTest {
 
     private MockMvc mockMvc;
 
     @InjectMocks
-    private ApiController apiController;
+    private NaverApiController apiController;
 
     @Mock
-    private ApiService apiService;
+    private NaverApiService apiService;
 
     @BeforeEach
     void setUp() {
@@ -37,13 +36,13 @@ class ApiControllerTest {
 
     @Test
     @DisplayName("성공하는 네이버 검색 호출 케이스")
-    void test_callbackNaverSearch_success() throws Exception {
+    void naverSearchApi() throws Exception {
         // given
         String query = "bag";
 
         // when
         ResultActions resultActions = mockMvc.perform(
-                MockMvcRequestBuilders.get("/nakji/api/naver")
+                MockMvcRequestBuilders.get("/nakji/api/naver/search")
                         .param("query", query)
                         .contentType(MediaType.APPLICATION_JSON));
 
@@ -54,13 +53,5 @@ class ApiControllerTest {
 
         Assertions.assertEquals(mvcResult.getResponse().getStatus(), 200);
         System.out.println("Result ::" + mvcResult.getResponse().getContentAsString());
-    }
-
-    @Test
-    void googleSearchApi() {
-    }
-
-    @Test
-    void openAIGptApi() {
     }
 }
