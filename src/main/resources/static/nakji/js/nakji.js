@@ -3,6 +3,7 @@ window.onload = function () {
     const initBindingObj = parseRssFeedToIntro();
     setSearchEngine();
     toggleSearchEngine();
+    popup.init();
 
     initBindingObj.then(obj => {
         renderingPage('/nakji/page/intro', empty, obj);
