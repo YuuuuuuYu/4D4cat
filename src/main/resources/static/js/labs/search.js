@@ -12,6 +12,7 @@ window.search = {
 
     }, rendering: function(data) {
         const response = document.querySelector('#response-section ul');
+        const resultData = document.createElement('ul');
         data.forEach(item => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
@@ -20,8 +21,10 @@ window.search = {
                                 <p>${item.content}</p>
                             </li>
                         `;
-            response.appendChild(listItem);
+            resultData.appendChild(listItem);
         })
+
+        response.innerHTML = resultData.innerHTML;
     }
 }
 
