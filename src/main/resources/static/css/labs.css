@@ -1,0 +1,184 @@
+/* 섹션 스타일: 상단 제목과 여백 */
+section {
+    margin-bottom: 2rem;
+}
+
+/* 섹션 제목 스타일 */
+section h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+/* 레이아웃: 사이드바 + 메인 콘텐츠를 수평 배치 */
+.layout {
+    display: flex;
+    flex: 1;
+    min-height: 0; /* Flex 아이템의 올바른 스케일링 */
+}
+
+/* 사이드바 영역 */
+.sidebar {
+    width: 200px;
+    background: #f4f4f4;
+    border-right: 1px solid #ccc;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+/* 사이드바 내 nav 스타일 재정의 */
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar nav li {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.sidebar nav li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sidebar nav li a:hover {
+    text-decoration: underline;
+}
+
+/* 메인 콘텐츠 영역 */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+/* 요청/응답 섹션을 구분하기 위한 스타일 */
+.response-section {
+    margin: 2rem 0;
+    padding: 1rem;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.response-section h3 {
+    margin-top: 0;
+}
+
+.response-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.response-section li {
+    margin-bottom: 0.5rem;
+}
+
+.response-section a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.response-section a:hover {
+    text-decoration: underline;
+}
+
+.response-section pre {
+    background: #ededed;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* 폼 스타일 */
+div.search-section {
+    margin: 1rem 0;
+}
+
+div.search-section label {
+    display: inline-block;
+    margin-right: 0.5rem;
+    font-weight: bold;
+}
+
+div.search-section input[type="text"] {
+    padding: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+div.search-section button[type="button"] {
+    padding: 0.4rem 0.8rem;
+    margin: 0.5rem 0 0.5rem 0;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+div.search-section button[type="button"]:hover {
+    background: #555;
+}
+
+/* module-section: 입력 영역을 정돈하기 위한 스타일 */
+.module-section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+/* label과 input 간 간격, input 기본 스타일 */
+.module-section label {
+    font-weight: bold;
+}
+
+.module-section input[type="text"],
+.module-section input[placeholder] {
+    padding: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* 호출 버튼 스타일 (기존 버튼 스타일과 유사) */
+.module-section button[type="button"] {
+    padding: 0.4rem 0.8rem;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.module-section button[type="button"]:hover {
+    background: #555;
+}
+
+/* 스피너 스타일 */
+.spinner {
+    border: 4px solid #f3f3f3; /* 회색 배경 */
+    border-top: 4px solid #333; /* 검정색 상단 */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    margin-left: 10px; /* 버튼과의 간격 */
+}
+
+/* 회전 애니메이션 */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 버튼 비활성화 스타일 */
+div.module-section button:disabled {
+    background: #777;
+    cursor: not-allowed;
+}

@@ -1,0 +1,13 @@
+<section>
+    <h2>{{thirdPartyName}} search</h2>
+    <div class="search-section">
+        <label for="search-keyword">검색어:</label>
+        <input type="text" id="search-keyword" placeholder="검색어를 입력하세요" >
+        <button id="search-button" type="button" data-search-url="/labs/{{thirdPartyName}}/search">검색</button>
+    </div>
+    <div id="response-section" class="response-section">
+        <h3>검색 결과</h3>
+        <ul></ul>
+    </div>
+</section>
+<script src="/js/labs/search.js"></script>
