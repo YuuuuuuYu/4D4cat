@@ -5,9 +5,7 @@ import com.nakji.myapp.labs.common.model.LabsInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -18,12 +16,11 @@ public class LabsService {
 
     public LabsInfo getThirdPartyInfo(String apiName) {
         if (apiName == null || apiName.trim().isEmpty())
-            return new LabsInfo("", "", null, false);
+            return new LabsInfo("", false);
 
-        Map<String, Boolean> labsModuleInfo = Collections.singletonMap(apiName, true);
         String thirdPartyType = secrets.getThirdPartyType().getOrDefault(apiName, "");
 
-        return new LabsInfo(apiName, thirdPartyType, labsModuleInfo, SEARCH.equals(thirdPartyType));
+        return new LabsInfo(apiName, SEARCH.equals(thirdPartyType));
     }
 
     public List<String> getThirdPartyList() {

@@ -5,26 +5,24 @@
         <nav>
             <ul>
                 {{#thirdPartyList}}
-                    <li><a href="/labs?api={{.}}">{{.}}</a></li>
+                    <li><a href="/labs/{{.}}">{{.}}</a></li>
                 {{/thirdPartyList}}
             </ul>
         </nav>
     </aside>
     <main class="main-content">
-        {{#thirdPartyType}}
-            {{#isSearch}}
-                {{>sections/labs/search}}
-            {{/isSearch}}
-            {{^isSearch}}
-                {{#module.openai}}
-                    {{>sections/labs/openai}}
-                {{/module.openai}}
-                {{#module.woorimail}}
-                    {{>sections/labs/woorimail}}
-                {{/module.woorimail}}
-                <script src="/js/labs/module.js"></script>
-            {{/isSearch}}
-        {{/thirdPartyType}}
+        {{#isSearch}}
+            {{>sections/labs/search}}
+        {{/isSearch}}
+        {{^isSearch}}
+            {{#isOpenai}}
+                {{>sections/labs/openai}}
+            {{/isOpenai}}
+            {{#isWoorimail}}
+                {{>sections/labs/woorimail}}
+            {{/isWoorimail}}
+            <script src="/js/labs/module.js"></script>
+        {{/isSearch}}
     </main>
 </div>
 {{>partials/footer}}
