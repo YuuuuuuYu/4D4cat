@@ -22,9 +22,10 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 public class GoogleApiService {
-    private final ThirdPartyProperties secrets;
     private static final String DEFAULT_QUERY = "bag";
     private static final String BASE_URL = "https://www.googleapis.com";
+
+    private final ThirdPartyProperties secrets;
 
     public List<SearchForm> googleSearch(String query) {
         List<SearchForm> returnPage = new ArrayList<>();

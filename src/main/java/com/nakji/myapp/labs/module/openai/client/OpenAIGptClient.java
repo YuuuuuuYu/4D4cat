@@ -6,7 +6,6 @@ import feign.RequestLine;
 import feign.Response;
 
 public interface OpenAIGptClient {
-
     @RequestLine("POST /v1/chat/completions")
     @Headers({
             "Content-Type: application/json;charset=UTF-8",

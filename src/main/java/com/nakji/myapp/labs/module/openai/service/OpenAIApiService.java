@@ -17,8 +17,9 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 public class OpenAIApiService {
-    private final ThirdPartyProperties secrets;
     private static final String BASE_URL = "https://api.openai.com";
+
+    private final ThirdPartyProperties secrets;
 
     public String openAIGpt(String prompt) {
         if (prompt == null || prompt.isEmpty()) return "";

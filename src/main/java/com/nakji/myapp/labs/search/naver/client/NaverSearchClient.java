@@ -6,7 +6,6 @@ import feign.RequestLine;
 import feign.Response;
 
 public interface NaverSearchClient {
-
     @RequestLine("GET /v1/search/{serviceId}?query={query}")
     @Headers({
             "Content-Type: application/json;charset=UTF-8",

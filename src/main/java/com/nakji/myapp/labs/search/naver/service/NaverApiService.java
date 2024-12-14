@@ -22,10 +22,11 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 public class NaverApiService {
-    private final ThirdPartyProperties secrets;
     private static final String DEFAULT_QUERY = "bag";
     private static final String DEFAULT_SERVICE_ID = "blog.json";
     private static final String BASE_URL = "https://openapi.naver.com";
+
+    private final ThirdPartyProperties secrets;
 
     public List<SearchForm> naverSearch(String serviceId, String query) {
         List<SearchForm> returnPage = new ArrayList<>();
