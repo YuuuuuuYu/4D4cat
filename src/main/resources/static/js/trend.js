@@ -27,7 +27,7 @@ window.trend = {
         newsList.innerHTML = ''; // Clear the list
 
         if (groupedData[date]) {
-            const sortedNews = groupedData[date].sort((a, b) => a.rank - b.rank).slice(0, 5); // Sort and limit to 5
+            const sortedNews = groupedData[date].sort((a, b) => a.rank - b.rank).slice(0, 10); // Sort and limit to 10
             sortedNews.forEach(news => {
                 const listItem = document.createElement('li');
                 listItem.classList.add('news-card');
