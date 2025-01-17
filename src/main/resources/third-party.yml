@@ -1,0 +1,16 @@
+third-party:
+  naver:
+    api-type: 'search'
+    naver-id: ${NAVER_CLIENT_ID}
+    naver-key: ${NAVER_CLIENT_SECRET}
+  google:
+    api-type: 'search'
+    google-key: ${GOOGLE_KEY}
+    google-cx: ${GOOGLE_CX}
+  openai:
+    api-type: 'module'
+    openai-key: ${OPENAI_KEY}
+  woorimail:
+    api-type: 'module'
+    woorimail-key: ${WOORIMAIL_KEY}
+    domain: 'http://localhost'

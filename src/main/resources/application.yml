@@ -19,3 +19,4 @@ spring:
     import:
       - 'classpath:db.yml'
       - 'classpath:third-party.yml'
+      - 'classpath:security.yml'
