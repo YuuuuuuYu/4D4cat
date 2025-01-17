@@ -1,6 +1,6 @@
 package com.nakji.myapp.labs.common.service;
 
-import com.nakji.myapp.common.config.ThirdPartyProperties;
+import com.nakji.myapp.common.property.ThirdPartyProperties;
 import com.nakji.myapp.labs.common.model.LabsInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,6 @@ public class LabsService {
             return new LabsInfo("", false);
 
         String thirdPartyType = secrets.getThirdPartyType().getOrDefault(apiName, "");
-
         return new LabsInfo(apiName, SEARCH.equals(thirdPartyType));
     }
 

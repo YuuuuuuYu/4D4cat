@@ -1,4 +1,4 @@
-package com.nakji.myapp.labs.search.google.client;
+package com.nakji.myapp.labs.google.client;
 
 import feign.Headers;
 import feign.Param;

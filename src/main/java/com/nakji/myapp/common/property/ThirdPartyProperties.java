@@ -1,11 +1,11 @@
-package com.nakji.myapp.common.config;
+package com.nakji.myapp.common.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
 import java.util.Map;
 
-@ConfigurationProperties(prefix = "third-party")
+@ConfigurationProperties(prefix="third-party")
 public record ThirdPartyProperties (
     Naver naver,
     Google google,

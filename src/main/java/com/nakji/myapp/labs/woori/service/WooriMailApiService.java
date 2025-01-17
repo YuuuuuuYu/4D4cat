@@ -1,9 +1,9 @@
-package com.nakji.myapp.labs.module.woori.service;
+package com.nakji.myapp.labs.woori.service;
 
-import com.nakji.myapp.labs.module.woori.client.WooriMailClient;
-import com.nakji.myapp.labs.module.woori.model.WooriMailDto;
-import com.nakji.myapp.labs.module.woori.model.WooriMailRequestDto;
-import com.nakji.myapp.common.config.ThirdPartyProperties;
+import com.nakji.myapp.labs.woori.client.WooriMailClient;
+import com.nakji.myapp.labs.woori.model.WooriMailDto;
+import com.nakji.myapp.labs.woori.model.WooriMailRequestDto;
+import com.nakji.myapp.common.property.ThirdPartyProperties;
 import com.nakji.myapp.common.util.NakjiUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import feign.Feign;
@@ -19,8 +19,9 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 public class WooriMailApiService {
-    private final ThirdPartyProperties secrets;
     private static final String API_URL = "https://woorimail.com";
+
+    private final ThirdPartyProperties secrets;
 
     public String sendMail(WooriMailDto dto) {
         if(!checkMailStatus()) {

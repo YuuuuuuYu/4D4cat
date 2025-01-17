@@ -1,37 +1,38 @@
 package com.nakji.myapp.labs.common.controller;
 
-import com.nakji.myapp.labs.common.model.LabsInfo;
-import com.nakji.myapp.labs.common.service.LabsService;
+import com.nakji.myapp.labs.common.model.SearchForm;
+import com.nakji.myapp.labs.openai.service.OpenAIApiService;
+import com.nakji.myapp.labs.google.service.GoogleApiService;
+import com.nakji.myapp.labs.naver.service.NaverApiService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/labs")
 public class LabsController {
-    private final LabsService labsService;
+    private final NaverApiService naverApiService;
+    private final GoogleApiService googleApiService;
+    private final OpenAIApiService openAIApiService;
 
-    @GetMapping("/{thirdParty}")
-    public String labs(Model model, @PathVariable String thirdParty) {
-        LabsInfo labsInfo = labsService.getThirdPartyInfo(thirdParty);
-        String thirdPartyName = labsInfo.thirdPartyName();
-        switch (thirdPartyName) {
-            case "naver", "google" -> {
-                model.addAttribute("isSearch", labsInfo.isSearch());
-            } case "openai" -> {
-                model.addAttribute("isOpenai", true);
-            } case "woorimail" -> {
-                model.addAttribute("isWoorimail", true);
-            }
-        }
-        model.addAttribute("title", "Labs");
-        model.addAttribute("thirdPartyName", labsInfo.thirdPartyName());
-        model.addAttribute("thirdPartyList", labsService.getThirdPartyList());
+    @GetMapping("/naver/search")
+    public List<SearchForm> naverSearchApi(@RequestParam(name = "serviceId", required = false) String serviceId
+            , @RequestParam(name = "query", required = false) String query) {
+        return naverApiService.naverSearch(serviceId, query);
+    }
 
-        return "labs";
+    @GetMapping("/google/search")
+    public List<SearchForm> googleSearchApi(@RequestParam(name = "query", required = false) String query) {
+        return googleApiService.googleSearch(query);
+    }
+
+    @GetMapping("/openai/call")
+    public String openAIGptApi(@RequestParam(name = "prompt", required = false) String prompt) {
+        return openAIApiService.openAIGpt(prompt);
     }
 }

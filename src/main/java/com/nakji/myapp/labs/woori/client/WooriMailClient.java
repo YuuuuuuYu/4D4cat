@@ -1,4 +1,4 @@
-package com.nakji.myapp.labs.module.woori.client;
+package com.nakji.myapp.labs.woori.client;
 
 import feign.Headers;
 import feign.RequestLine;

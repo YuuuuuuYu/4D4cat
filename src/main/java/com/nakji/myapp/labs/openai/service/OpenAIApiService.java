@@ -1,9 +1,9 @@
-package com.nakji.myapp.labs.module.openai.service;
+package com.nakji.myapp.labs.openai.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.nakji.myapp.common.config.ThirdPartyProperties;
+import com.nakji.myapp.common.property.ThirdPartyProperties;
 import com.nakji.myapp.common.util.NakjiUtil;
-import com.nakji.myapp.labs.module.openai.client.OpenAIGptClient;
+import com.nakji.myapp.labs.openai.client.OpenAIGptClient;
 import feign.Feign;
 import feign.Response;
 import lombok.RequiredArgsConstructor;

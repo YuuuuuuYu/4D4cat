@@ -1,4 +1,4 @@
-package com.nakji.myapp.labs.module.woori.model;
+package com.nakji.myapp.labs.woori.model;
 
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.nakji.myapp.labs.module.openai.client;
+package com.nakji.myapp.labs.openai.client;
 
 import feign.Headers;
 import feign.Param;

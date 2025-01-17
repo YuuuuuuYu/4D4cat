@@ -1,4 +1,4 @@
-package com.nakji.myapp.labs.search.naver.client;
+package com.nakji.myapp.labs.naver.client;
 
 import feign.Headers;
 import feign.Param;

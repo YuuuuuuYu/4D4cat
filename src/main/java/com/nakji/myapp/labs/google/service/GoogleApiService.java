@@ -1,10 +1,10 @@
-package com.nakji.myapp.labs.search.naver.service;
+package com.nakji.myapp.labs.google.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.nakji.myapp.common.config.ThirdPartyProperties;
+import com.nakji.myapp.common.property.ThirdPartyProperties;
 import com.nakji.myapp.common.util.NakjiUtil;
 import com.nakji.myapp.labs.common.model.SearchForm;
-import com.nakji.myapp.labs.search.naver.client.NaverSearchClient;
+import com.nakji.myapp.labs.google.client.GoogleSearchClient;
 import feign.Feign;
 import feign.Response;
 import feign.gson.GsonDecoder;
@@ -21,17 +21,16 @@ import java.util.Optional;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class NaverApiService {
+public class GoogleApiService {
     private static final String DEFAULT_QUERY = "bag";
-    private static final String DEFAULT_SERVICE_ID = "blog.json";
-    private static final String BASE_URL = "https://openapi.naver.com";
+    private static final String BASE_URL = "https://www.googleapis.com";
 
     private final ThirdPartyProperties secrets;
 
-    public List<SearchForm> naverSearch(String serviceId, String query) {
+    public List<SearchForm> googleSearch(String query) {
         List<SearchForm> returnPage = new ArrayList<>();
 
-        try (Response response = naverSearchConnection(serviceId, query)) {
+        try (Response response = googleSearchConnection(query)) {
             if (response.status() == 200) {
                 JsonNode resultJson = NakjiUtil.readBody(response.body().asInputStream());
                 JsonNode jsonMap = resultJson.findValue("items");
@@ -39,31 +38,30 @@ public class NaverApiService {
                 if (jsonMap != null && jsonMap.isArray()) {
                     jsonMap.forEach(item -> {
                         String title = Optional.ofNullable(item.get("title")).map(JsonNode::asText).orElse("");
-                        String description = Optional.ofNullable(item.get("description")).map(JsonNode::asText).orElse("");
+                        String snippet = Optional.ofNullable(item.get("snippet")).map(JsonNode::asText).orElse("");
                         String link = Optional.ofNullable(item.get("link")).map(JsonNode::asText).orElse("");
 
-                        returnPage.add(new SearchForm(title, description, link));
+                        returnPage.add(new SearchForm(title, snippet, link));
                     });
                 }
             } else {
-                log.info("NaverApiService.naverSearch Request Status: {}, Body: {}", response.status(), response.body().toString());
+                log.info("GoogleApiService.googleSearch Request Status: {}, Body: {}", response.status(), response.body().toString());
                 throw new BadRequestException("Bad request with status: " + response.status());
             }
         } catch (Exception e) {
-            log.error("NaverApiService.naverSearch Error: ", e);
+            log.error("GoogleApiService.googleSearch Error: ", e);
         }
 
         return returnPage;
     }
 
-    private Response naverSearchConnection(String id, String search) {
+    private Response googleSearchConnection(String search) {
         return Feign.builder()
                 .encoder(new GsonEncoder())
                 .decoder(new GsonDecoder())
-                .target(NaverSearchClient.class, BASE_URL)
-                .search(secrets.naver().naverId(),
-                        secrets.naver().naverKey(),
-                        Optional.ofNullable(id).orElse(DEFAULT_SERVICE_ID),
+                .target(GoogleSearchClient.class, BASE_URL)
+                .search(secrets.google().googleKey(),
+                        secrets.google().googleCx(),
                         Optional.ofNullable(search).orElse(DEFAULT_QUERY));
     }
 }
