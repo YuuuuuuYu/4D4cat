@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.nakji.myapp.common.property.ThirdPartyProperties;
 import com.nakji.myapp.common.util.NakjiUtil;
 import com.nakji.myapp.labs.common.model.SearchForm;
-import com.nakji.myapp.labs.naver.client.NaverProfileClient;
 import com.nakji.myapp.labs.naver.client.NaverSearchClient;
 import feign.Feign;
 import feign.Response;
@@ -66,13 +65,5 @@ public class NaverApiService {
                         secrets.naver().naverKey(),
                         Optional.ofNullable(id).orElse(DEFAULT_SERVICE_ID),
                         Optional.ofNullable(search).orElse(DEFAULT_QUERY));
-    }
-
-    public Response naverProfileConnection(String tokenType, String tokenValue) {
-        return Feign.builder()
-                .encoder(new GsonEncoder())
-                .decoder(new GsonDecoder())
-                .target(NaverProfileClient.class, BASE_URL)
-                .search(tokenType, tokenValue);
     }
 }
